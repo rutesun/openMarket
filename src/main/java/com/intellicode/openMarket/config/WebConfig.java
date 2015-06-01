@@ -1,16 +1,18 @@
 package com.intellicode.openMarket.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import com.intellicode.openMarket.util.interceptor.MultiFileInterceptor;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
+
+import javax.servlet.annotation.MultipartConfig;
 
 @Configuration
 @EnableWebMvc
@@ -35,6 +37,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
   }
 
   @Bean
+  @Profile("develop")
   public UrlBasedViewResolver getUrlBasedViewResolver(){
     UrlBasedViewResolver resolver = new UrlBasedViewResolver();
     resolver.setViewClass(TilesView.class);
@@ -43,6 +46,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
   }
 
   @Bean
+  @Profile("develop")
   public TilesConfigurer getTilesConfigurer(){
     TilesConfigurer configure = new TilesConfigurer();
     configure.setDefinitions("classpath:/tiles/*.xml");
@@ -75,5 +79,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(webContentInterceptor());
+    registry.addInterceptor(new MultiFileInterceptor()).addPathPatterns("/product/create");
+  }
+
+  @Bean
+  public MultipartResolver multipartResolver(){
+
+    return new StandardServletMultipartResolver();
   }
 }

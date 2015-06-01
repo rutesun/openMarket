@@ -4,6 +4,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 import java.nio.charset.StandardCharsets;
 
@@ -15,6 +16,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     registration.setInitParameter("dispatchOptionsRequest", "true");
     registration.setAsyncSupported(true);
+    registration.setMultipartConfig(new MultipartConfigElement("/tmp"));
   }
 
   @Override

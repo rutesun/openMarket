@@ -19,7 +19,7 @@ public class Home {
         return new Status("OK");
     }
 
-    @RequestMapping(value = "regist", method = RequestMethod.GET)
+    @RequestMapping(value = "view/product", method = RequestMethod.GET)
     public String regist(Locale locale, HttpServletRequest request){
         return "registProduct";
     }
