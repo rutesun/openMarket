@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC       
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="base.product" template="/WEB-INF/views/base/main.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/views/base/nav-top.jsp"></put-attribute>
+		<put-attribute name="left" value="/WEB-INF/views/base/nav-left.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/base/footer.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="registProduct" extends="base.product">
+		<put-attribute name="body" value="/WEB-INF/views/regist/registProduct.jsp"></put-attribute>
+	</definition>	
+	
+</tiles-definitions>
