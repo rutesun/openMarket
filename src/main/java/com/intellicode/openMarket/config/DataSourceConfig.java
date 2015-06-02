@@ -16,8 +16,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+
 @Configuration
-@MapperScan(value = "org.rutesun.starter.mapper")
+@MapperScan(value = "com.intellicode.openMarket.mapper")
 @EnableTransactionManagement
 public class DataSourceConfig {
 
@@ -32,7 +33,6 @@ public class DataSourceConfig {
 
 	@Bean(name = "dataSource")
 	public DataSource dataSource() throws Exception {
-		System.out.println("\n\ndatasource\n\n");
 
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -44,6 +44,9 @@ public class DataSourceConfig {
 		dataSource.setMaxIdle(30);
 		dataSource.setValidationQuery("select 1");
 		dataSource.setTestWhileIdle(true);
+
+		System.out.println("\n\ndatasource\n\n");
+
 		return dataSource;
 	}
 
