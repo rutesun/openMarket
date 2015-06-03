@@ -12,8 +12,6 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
-import javax.servlet.annotation.MultipartConfig;
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(
@@ -74,6 +72,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
     registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
     registry.addResourceHandler("/html/**").addResourceLocations("/resources/html/");
+    registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/");
+    registry.addResourceHandler("/product_img/**").addResourceLocations("/resources/productImages/");
   }
 
   @Override

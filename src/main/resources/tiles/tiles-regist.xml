@@ -13,6 +13,10 @@
 	
 	<definition name="registProduct" extends="base.productInfo">
 		<put-attribute name="body" value="/WEB-INF/views/regist/registProduct.jsp"></put-attribute>
-	</definition>	
-	
+	</definition>
+
+	<definition name="registSelling" extends="base.productInfo">
+		<put-attribute name="body" value="/WEB-INF/views/regist/registSelling.jsp"></put-attribute>
+	</definition>
+
 </tiles-definitions>

@@ -1,6 +1,8 @@
 package com.intellicode.openMarket.mapper;
 
+import com.intellicode.openMarket.vo.product.BaseProduct;
 import com.intellicode.openMarket.vo.product.ProductRequest;
+import com.intellicode.openMarket.vo.product.RegistSellingRequest;
 import org.mybatis.spring.annotation.MapperScan;
 
 import java.util.List;
@@ -10,17 +12,17 @@ import java.util.List;
  */
 @MapperScan
 public interface ProductMapper {
-    public boolean insertProduct(ProductRequest product) throws Exception;
+    boolean insertProduct(ProductRequest product) throws Exception;
 
-    public boolean updateProduct(ProductRequest product) throws Exception;
+    boolean updateProduct(ProductRequest product) throws Exception;
 
-    public boolean deleteProduct(ProductRequest product) throws Exception;
+    boolean deleteProduct(ProductRequest product) throws Exception;
 
-    public boolean registSellingProduct(ProductRequest product) throws Exception;
+    boolean registSellingProduct(RegistSellingRequest product) throws Exception;
 
-    public boolean pauseSellingProduct(ProductRequest product) throws Exception;
+    boolean pauseSellingProduct(BaseProduct product) throws Exception;
 
-    public List<ProductRequest> selectSellingProduct(ProductRequest product) throws Exception;
+    List<ProductRequest> selectSellingProduct(BaseProduct product) throws Exception;
 
-    public List<ProductRequest> selectProduct(ProductRequest product) throws Exception;
+    List<ProductRequest> selectProduct(BaseProduct product) throws Exception;
 }

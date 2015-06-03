@@ -3,7 +3,9 @@ package com.intellicode.openMarket.service;
 import com.intellicode.openMarket.mapper.ProductMapper;
 import com.intellicode.openMarket.util.interceptor.CustomFileUtils;
 import com.intellicode.openMarket.vo.Status;
+import com.intellicode.openMarket.vo.product.BaseProduct;
 import com.intellicode.openMarket.vo.product.ProductRequest;
+import com.intellicode.openMarket.vo.product.RegistSellingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,7 @@ public class DefaultProductService implements ProductService{
     public Status insertProduct(ProductRequest product) throws Exception {
 
         String fileId = CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getImage());
-
+        product.setImageUrl(fileId);
         boolean ret = productMapper.insertProduct(product);
         return new Status("OK");
     }
@@ -47,27 +49,28 @@ public class DefaultProductService implements ProductService{
     }
 
     @Override
-    public Status deleteProduct(ProductRequest product) throws Exception {
+    public Status deleteProduct(BaseProduct product) throws Exception {
         return null;
     }
 
     @Override
-    public Status registSellingProduct(ProductRequest product) throws Exception {
+    public Status registSellingProduct(BaseProduct product) throws Exception {
+        boolean ret = productMapper.registSellingProduct((RegistSellingRequest) product);
+        return new Status("OK");
+    }
+
+    @Override
+    public Status pauseSellingProduct(BaseProduct product) throws Exception {
         return null;
     }
 
     @Override
-    public Status pauseSellingProduct(ProductRequest product) throws Exception {
-        return null;
+    public List<ProductRequest> selectSellingProduct(BaseProduct product) throws Exception {
+        return productMapper.selectSellingProduct(product);
     }
 
     @Override
-    public List<ProductRequest> selectSellingProduct(ProductRequest product) throws Exception {
-        return null;
-    }
-
-    @Override
-    public List<ProductRequest> selectProduct(ProductRequest product) throws Exception {
-        return null;
+    public List<ProductRequest> selectProduct(BaseProduct product) throws Exception {
+        return productMapper.selectProduct(product);
     }
 }

@@ -10,7 +10,7 @@
 <h2>Hello world</h2>
 
 <form class="form-horizontal" method="POST" id="createProduct"
-      name="createProduct" action="${pageContext.request.contextPath}/product/create" enctype="multipart/form-data" encoding="multipart/form-data">
+      name="createProduct" action="${pageContext.request.contextPath}/product/sell" enctype="multipart/form-data" encoding="multipart/form-data">
     <div class="row">
         <div class="col-lg-6 control-box">
                 <legend>상품 정보</legend>

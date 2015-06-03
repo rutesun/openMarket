@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intellicode.openMarket.mapper.ProductMapper">
+
+    <insert
+            id="insertProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		insert into tb_product (code, name, price, company_id, info, spec, insert_date, insert_timestamp, amount, inventory_amount, image_url, thumbnail_url)
+		  values(#{code}, #{name}, #{price}, #{companyId}, #{info}, #{spec}, (select now()), (select UNIX_TIMESTAMP()), #{amount}, #{amount}, #{imageUrl}, #{thumbnailUrl})
+	</insert>
+
+    <insert
+            id="registSellingProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		insert into tb_product_selling (code, company_id, selling_amount, start_date, start_timestamp, end_date, end_timestamp)
+		  values(#{code}, #{companyId}, #{sellingAmount}, (SELECT FROM_UNIXTIME(#{startTimestamp},'%Y-%m-%d %H:%i:%s')), #{startTimestamp}, (SELECT FROM_UNIXTIME(#{endTimestamp},'%Y-%m-%d %H:%i:%s')), #{endTimestamp})
+	</insert>
+
+    <update
+            id="updateProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+
+    </update>
+
+    <update
+            id="pauseSellingProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		delete from tb_product_selling
+		where id = #{param}
+	</update>
+
+    <delete
+            id="deleteProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		delete from tb_product
+		where id = #{param}
+	</delete>
+
+    <select
+            id="selectSellingProduct"
+            parameterType="com.intellicode.openMarket.vo.product.BaseProduct"
+            resultType="com.intellicode.openMarket.vo.product.RegistSellingRequest"
+            >
+        select *
+        from tb_product_selling sel inner join tb_product prod on sel.code = prod.code
+        where
+        1=1
+        <if test="code != null">
+        AND code = #{code}
+        </if>
+        <if test="companyId != null">
+        AND company_id = #{companyId}
+        </if>
+    </select>
+
+    <select
+            id="selectProduct"
+            parameterType="com.intellicode.openMarket.vo.product.BaseProduct"
+            resultType="com.intellicode.openMarket.vo.product.ProductResponse"
+            >
+        select
+            tb_product.*,
+            tb_product.inventory_amount as amount,
+            tb_product.selled_amount as selledAmount,
+            tb_product.image_url as imageUrl,
+            tb_product.thumbnail_url as thumbnailUrl,
+            tb_company.companyName as companyName
+        from tb_product inner join tb_company on tb_product.company_id = tb_company.companyId
+        where
+        1=1
+        <if test="code != null">
+        AND code = #{code}
+        </if>
+        <if test="companyId != null">
+        AND company_id = #{companyId}
+        </if>
+    </select>
+
+
+</mapper>
