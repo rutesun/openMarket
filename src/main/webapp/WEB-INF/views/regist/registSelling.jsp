@@ -12,7 +12,6 @@
 
 
 <h2>Hello world</h2>
-<p>'${parsed}'</p>
 <div class="row">
     <div class="col-lg-6 control-box">
         <fieldset>
@@ -90,7 +89,7 @@
                 <label for="amount" class="col-sm-3 control-label">재고</label>
 
                 <div class="col-sm-9">
-                    <p class="form-control" id="amount">${productList[0].amount}</p>
+                    <p class="form-control" id="amount">${productList[0].inventoryAmount}</p>
                 </div>
             </div>
             <div class="form-group">
@@ -135,7 +134,7 @@
         var fd = new FormData($(this)[0]);
         fd.append("code", $('#code').text());
         fd.append("startTimestamp", new Date($('#startDate').val()).getTime());
-        fd.append("endTimestamp", new Date($('#endTimestamp').val()).getTime());
+        fd.append("endTimestamp", new Date($('#endDate').val()).getTime());
         //fd.append("label", "WEBUPLOAD");
         $.ajax({
             url: '${pageContext.request.contextPath}/product/sell',

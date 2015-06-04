@@ -10,79 +10,119 @@
 <h2>Hello world</h2>
 
 <form class="form-horizontal" method="POST" id="createProduct"
-      name="createProduct" action="${pageContext.request.contextPath}/product/sell" enctype="multipart/form-data" encoding="multipart/form-data">
+      name="createProduct" action="${pageContext.request.contextPath}/product/sell" enctype="multipart/form-data"
+      encoding="multipart/form-data">
     <div class="row">
         <div class="col-lg-6 control-box">
-                <legend>상품 정보</legend>
-                <div class="form-group">
-                    <label for="code" class="col-sm-3 control-label">상품 코드</label>
+            <legend>상품 정보</legend>
+            <div class="form-group">
+                <label for="code" class="col-sm-3 control-label">상품 코드</label>
 
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="code" id="code" placeholder="상품 코드">
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="code" id="code" placeholder="상품 코드">
 
-                        <p><form:errors path="code" cssClass="error"/></p>
-                    </div>
+                    <p><form:errors path="code" cssClass="error"/></p>
                 </div>
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">상품명</label>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">상품명</label>
 
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="상품명">
-                    </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="상품명">
                 </div>
-                <div class="form-group">
-                    <label for="price" class="col-sm-3 control-label">가격</label>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-sm-3 control-label">가격</label>
 
-                    <div class="col-sm-9">
-                        <input type="number" class="form-control" name="price" id="price" placeholder="가격" min="0">
-                    </div>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" name="price" id="price" placeholder="가격" min="0">
                 </div>
-                <div class="form-group">
-                    <label for="info" class="col-sm-3 control-label">상품 정보</label>
+            </div>
+            <div class="form-group">
+                <label for="info" class="col-sm-3 control-label">상품 정보</label>
 
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="info" id="info" placeholder="상품 정보">
-                    </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="info" id="info" placeholder="상품 정보">
                 </div>
-                <div class="form-group">
-                    <label for="spec" class="col-sm-3 control-label">상품 스펙</label>
+            </div>
+            <div class="form-group">
+                <label for="spec" class="col-sm-3 control-label">상품 스펙</label>
 
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="spec" id="spec" placeholder="상품 스펙">
-                    </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="spec" id="spec" placeholder="상품 스펙">
                 </div>
-                <div class="form-group">
-                    <label for="image" class="col-sm-3 control-label">상품 이미지</label>
+            </div>
+            <div class="form-group">
+                <label for="sel-classification1" class="col-sm-3 control-label">카테고리1 </label>
 
-                    <div class="col-sm-9">
-                        <input type="file" class="form-control" name="image" id="image" placeholder="상품 이미지" accept="image/*">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="thumbnail" class="col-sm-3 control-label">상품 썸네일 이미지</label>
+                <div class="col-sm-9">
+                    <select name="classification1" id="sel-classification1" class="form-control">
 
-                    <div class="col-sm-9">
-                        <input type="file" class="form-control" name="thumbnail"id="thumbnail" placeholder="상품 썸네일 이미지"
-                               accept="image/*">
-                    </div>
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label for="amount" class="col-sm-3 control-label">재고</label>
+            </div>
+            <div class="form-group">
+                <label for="sel-classification2" class="col-sm-3 control-label">카테고리2 </label>
 
-                    <div class="col-sm-9">
-                        <input type="number" class="form-control" name="amount" id="amount" placeholder="재고" min="0">
-                    </div>
+                <div class="col-sm-9">
+                    <select name="classification2" id="sel-classification2" class="form-control">
+
+                    </select>
                 </div>
-                <div class="col-md-3 col-md-offset-9">
-                    <button type="submit" class="btn btn-default">제출</button>
+            </div>
+            <div class="form-group">
+                <label for="sel-classification3" class="col-sm-3 control-label">카테고리3 </label>
+
+                <div class="col-sm-9">
+                    <select name="classification3" id="sel-classification3" class="form-control">
+
+                    </select>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="sel-classification4" class="col-sm-3 control-label">카테고리4 </label>
+
+                <div class="col-sm-9">
+                    <select name="classification4" id="sel-classification4" class="form-control">
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image" class="col-sm-3 control-label">상품 이미지</label>
+
+                <div class="col-sm-9">
+                    <input type="file" class="form-control" name="image" id="image" placeholder="상품 이미지"
+                           accept="image/*">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="thumbnail" class="col-sm-3 control-label">상품 썸네일 이미지</label>
+
+                <div class="col-sm-9">
+                    <input type="file" class="form-control" name="thumbnail" id="thumbnail"
+                           placeholder="상품 썸네일 이미지"
+                           accept="image/*">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="amount" class="col-sm-3 control-label">재고</label>
+
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" name="amount" id="amount" placeholder="재고"
+                           min="0">
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-9">
+                <button type="submit" class="btn btn-default">제출</button>
+            </div>
         </div>
     </div>
 </form>
 
 <script type="text/javascript">
 
-   $('#createProduct').submit(function(e){
+    $('#createProduct').submit(function (e) {
         e.stopPropagation();
         var fd = new FormData($(this)[0]);
         //fd.append("label", "WEBUPLOAD");
@@ -93,7 +133,7 @@
             enctype: 'multipart/form-data',
             processData: false,  // tell jQuery not to process the data
             contentType: false   // tell jQuery not to set contentType
-        }).done(function( data ) {
+        }).done(function (data) {
             console.log(data);
         }).error(function () {
             alert("ERROR");
@@ -101,48 +141,42 @@
         return false;
     });
 
-    /*$(':submit').on('click', function (e) {
-        e.stopPropagation();
-        var formData = new FormData($('#createProduct')[0]);
-        $.ajax({
-            url: '${pageContext.request.contextPath}/product/create', //server script to process data
-            type: 'POST',
-            xhr: function () { // custom xhr
-                myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) { // if upload property exists
-                    myXhr.upload.addEventListener('progress', function(e) {
-                        var done = e.position || e.loaded, total = e.totalSize || e.total;
-                        console.log('xhr progress: ' + (Math.floor(done/total*1000)/10) + '%');
-                    }, false); // progressbar
-                }
-                return myXhr;
-            },
-            //Ajax events
-            success: completeHandler = function (data) {
-                /!*
-                 * workaround for crome browser // delete the fakepath
-                 *!/
-                if (navigator.userAgent.indexOf('Chrome')) {
-                    var catchFile = $(":file").val().replace(/C:\\fakepath\\/i, '');
-                }
-                else {
-                    var catchFile = $(":file").val();
-                }
-                var writeFile = $(":file");
-                writeFile.html(writer(catchFile));
-                $("*setIdOfImageInHiddenInput*").val(data.logo_id);
-            },
-            error: errorHandler = function () {
-                alert("Något gick fel");
-            },
-            // Form data
-            data: formData,
-            //Options to tell JQuery not to process data or worry about content-type
-            cache: false,
-            contentType: false,
-            processData: false,
-            enctype: 'multipart/form-data',
-        }, 'json');
-    });*/
+    $(function(){
+        var classifications = JSON.parse('${classifications}');
+
+        var $target1 = $('#sel-classification1'),
+                $target2 = $('#sel-classification2'),
+                $target3 = $('#sel-classification3'),
+                $target4 = $('#sel-classification4');
+
+
+
+
+
+        $target1.html(makeClassificationsList(classifications)).prop('selectedindex',0).on('change', function(){
+            var selected = $(this).find(":selected"),
+                code1 = $(selected).val();
+
+            $target2.html(makeClassificationsList(classifications[code1].next)).prop('selectedindex',0).on('change', function(){
+                selected = $(this).find(":selected");
+                code2 = $(selected).val();
+
+                $target3.html(makeClassificationsList(classifications[code1].next[code2].next)).prop('selectedindex',0).on('change', function(){
+                    selected = $(this).find(":selected");
+                    code3 = $(selected).val();
+
+                    $target4.html(makeClassificationsList(classifications[code1].next[code2].next[code3].next)).prop('selectedindex',0);
+                })
+            });
+        });
+
+        function makeClassificationsList(classifications, code){
+            var html = "";
+            for(var code in classifications){
+                html += '<option value="'+ code + '">'+ classifications[code].name +'</option>';
+            }
+            return html;
+        }
+    });
 </script>
 

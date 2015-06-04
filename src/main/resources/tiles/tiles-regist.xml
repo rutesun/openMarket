@@ -19,4 +19,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/regist/registSelling.jsp"></put-attribute>
 	</definition>
 
+	<definition name="listProduct" extends="base.productInfo">
+		<put-attribute name="body" value="/WEB-INF/views/regist/listProduct.jsp"></put-attribute>
+	</definition>
+
 </tiles-definitions>

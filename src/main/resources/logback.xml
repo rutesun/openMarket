@@ -70,15 +70,13 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 	</logger>
 	-->
 	
-	<!-- 
 	<logger name="org.mybatis.spring.SqlSessionUtils">
 		<level value="info" />
 	</logger>
 	<logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<level value="debug" />
 	</logger> 
-	-->
-         
+
     <root level="info">
         <appender-ref ref="console"/>
         <appender-ref ref="dailyRollingFileAppender"/>

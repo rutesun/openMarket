@@ -6,8 +6,8 @@
             id="insertProduct"
             parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
             >
-		insert into tb_product (code, name, price, company_id, info, spec, insert_date, insert_timestamp, amount, inventory_amount, image_url, thumbnail_url)
-		  values(#{code}, #{name}, #{price}, #{companyId}, #{info}, #{spec}, (select now()), (select UNIX_TIMESTAMP()), #{amount}, #{amount}, #{imageUrl}, #{thumbnailUrl})
+		insert into tb_product (code, name, price, company_id, info, spec, insert_date, insert_timestamp, inventory_amount, image_url, thumbnail_url)
+		  values(#{code}, #{name}, #{price}, #{companyId}, #{info}, #{spec}, (select now()), (select UNIX_TIMESTAMP()), #{inventoryAmount}, #{imageUrl}, #{thumbnailUrl})
 	</insert>
 
     <insert
@@ -23,6 +23,18 @@
             parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
             >
 
+    </update>
+
+    <update
+            id="updateProductInventory"
+            parameterType="com.intellicode.openMarket.vo.product.ChangeInventory"
+            >
+        update tb_product
+        SET
+          tb_product.inventory_amount = tb_product.inventory_amount + (#{changedInventoryAmount})
+        where
+        1=1
+            AND code = #{code}
     </update>
 
     <update
@@ -51,11 +63,14 @@
         where
         1=1
         <if test="code != null">
-        AND code = #{code}
+            AND code = #{code}
         </if>
         <if test="companyId != null">
-        AND company_id = #{companyId}
+            AND company_id = #{companyId}
         </if>
+        AND
+        (tb_product_selling.start_timestamp <![CDATA[ <= ]]> (select UNIX_TIMESTAMP())
+        AND tb_product_selling.end_timestamp <![CDATA[ >= ]]> (select UNIX_TIMESTAMP()))
     </select>
 
     <select
@@ -64,21 +79,65 @@
             resultType="com.intellicode.openMarket.vo.product.ProductResponse"
             >
         select
-            tb_product.*,
-            tb_product.inventory_amount as amount,
-            tb_product.selled_amount as selledAmount,
-            tb_product.image_url as imageUrl,
-            tb_product.thumbnail_url as thumbnailUrl,
-            tb_company.companyName as companyName
+        tb_product.*,
+        tb_product.inventory_amount as inventoryAmount,
+        tb_product.selled_amount as selledAmount,
+        tb_product.image_url as imageUrl,
+        tb_product.thumbnail_url as thumbnailUrl,
+        tb_company.companyName as companyName
         from tb_product inner join tb_company on tb_product.company_id = tb_company.companyId
         where
         1=1
         <if test="code != null">
-        AND code = #{code}
+            AND code = #{code}
         </if>
         <if test="companyId != null">
-        AND company_id = #{companyId}
+            AND company_id = #{companyId}
         </if>
+    </select>
+
+    <select
+            id="selectProductClassification1"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+        select acode code1, name from tb_product_acode
+        order by acode asc
+    </select>
+
+    <select
+            id="selectProductClassification2"
+            parameterType="com.intellicode.openMarket.vo.product.ProductClassification"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+
+        select acode code1, bcode code2, name from tb_product_bcode
+        WHERE
+          acode = #{code1}
+        order by acode, bcode asc
+    </select>
+
+    <select
+            id="selectProductClassification3"
+            parameterType="com.intellicode.openMarket.vo.product.ProductClassification"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+
+        select acode code1, bcode code2, ccode code3, name from tb_product_ccode
+        WHERE
+          acode = #{code1}
+          AND
+          bcode = #{code2}
+    </select>
+
+    <select
+            id="selectProductClassification4"
+            parameterType="com.intellicode.openMarket.vo.product.ProductClassification"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+
+        select acode code1, bcode code2, ccode code3, dcode code4, name from tb_product_dcode
+         WHERE
+          acode = #{code1}
+          AND
+          bcode = #{code2}
+          AND
+          ccode = #{code3}
     </select>
 
 

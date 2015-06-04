@@ -4,11 +4,13 @@ import com.intellicode.openMarket.mapper.ProductMapper;
 import com.intellicode.openMarket.util.interceptor.CustomFileUtils;
 import com.intellicode.openMarket.vo.Status;
 import com.intellicode.openMarket.vo.product.BaseProduct;
+import com.intellicode.openMarket.vo.product.ChangeInventory;
 import com.intellicode.openMarket.vo.product.ProductRequest;
 import com.intellicode.openMarket.vo.product.RegistSellingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
  * Created by rutes_000 on 2015-06-02.
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class DefaultProductService implements ProductService{
     @Autowired
     ApplicationContext ctx;
@@ -37,7 +40,10 @@ public class DefaultProductService implements ProductService{
     @Override
     public Status insertProduct(ProductRequest product) throws Exception {
 
+        System.out.println("Start : "+ System.currentTimeMillis());
         String fileId = CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getImage());
+        System.out.println("End : "+System.currentTimeMillis());
+
         product.setImageUrl(fileId);
         boolean ret = productMapper.insertProduct(product);
         return new Status("OK");
@@ -56,6 +62,7 @@ public class DefaultProductService implements ProductService{
     @Override
     public Status registSellingProduct(BaseProduct product) throws Exception {
         boolean ret = productMapper.registSellingProduct((RegistSellingRequest) product);
+        productMapper.updateProductInventory(new ChangeInventory(product.getCode(), (-((RegistSellingRequest) product).getSellingAmount())));
         return new Status("OK");
     }
 

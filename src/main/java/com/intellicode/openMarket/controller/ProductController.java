@@ -1,7 +1,12 @@
 package com.intellicode.openMarket.controller;
 
+import com.intellicode.openMarket.service.ProductService;
 import com.intellicode.openMarket.vo.Status;
+import com.intellicode.openMarket.vo.product.BaseProduct;
 import com.intellicode.openMarket.vo.product.ProductRequest;
+import com.intellicode.openMarket.vo.product.RegistSellingRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -17,13 +23,19 @@ import java.util.Locale;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    ApplicationContext ctx;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Status create(Locale locale, HttpServletRequest request, HttpServletResponse response
                          , @ModelAttribute ProductRequest product
         ) throws Exception {
 
-        return new Status("OK");
+        product.setCompanyId("RHTwsgyJfn");
+        return productService.insertProduct(product);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
@@ -32,10 +44,22 @@ public class ProductController {
         return new Status("OK");
     }
 
-    @RequestMapping(value = "/sell/regist", method = RequestMethod.POST)
+    @RequestMapping(value = "/sell", method = RequestMethod.POST)
     public Status regist(Locale locale, HttpServletRequest request, HttpServletResponse response
+            , @ModelAttribute RegistSellingRequest req
         ) throws Exception {
-        return new Status("OK");
+
+        req.setCompanyId("RHTwsgyJfn");
+        return productService.registSellingProduct(req);
+    }
+
+    @RequestMapping(value = "/sell", method = RequestMethod.GET)
+    public List<?> listSellingProduct(Locale locale, HttpServletRequest request, HttpServletResponse response
+            , @ModelAttribute BaseProduct req
+    ) throws Exception {
+
+        req.setCompanyId("RHTwsgyJfn");
+        return productService.selectSellingProduct(req);
     }
 
     @RequestMapping(value = "/pause", method = RequestMethod.PUT)

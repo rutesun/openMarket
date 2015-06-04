@@ -4,23 +4,23 @@ package com.intellicode.openMarket.vo.product;
  * Created by rutes_000 on 2015-06-03.
  */
 public class RegistSellingRequest extends BaseProduct{
-    private String startTimestamp;
-    private String endTimestamp;
+    private long startTimestamp;
+    private long endTimestamp;
     private int sellingAmount;
 
-    public String getStartTimestamp() {
-        return startTimestamp;
+    public long getStartTimestamp() {
+        return (int) (startTimestamp / 1000L);
     }
 
-    public void setStartTimestamp(String startTimestamp) {
+    public void setStartTimestamp(long startTimestamp) {
         this.startTimestamp = startTimestamp;
     }
 
-    public String getEndTimestamp() {
-        return endTimestamp;
+    public long getEndTimestamp() {
+        return (int) (endTimestamp / 1000L);
     }
 
-    public void setEndTimestamp(String endTimestamp) {
+    public void setEndTimestamp(long endTimestamp) {
         this.endTimestamp = endTimestamp;
     }
 

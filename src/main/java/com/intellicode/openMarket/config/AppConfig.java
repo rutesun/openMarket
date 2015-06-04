@@ -1,9 +1,10 @@
 package com.intellicode.openMarket.config;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Import;
+import com.intellicode.openMarket.mapper.ProductMapper;
+import com.intellicode.openMarket.util.interceptor.InitializeProductClassification;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Controller;
 
 @Configuration
@@ -14,4 +15,14 @@ import org.springframework.stereotype.Controller;
 })
 public class AppConfig {
 
+    @Autowired
+    ApplicationContext ctx;
+
+    @Bean
+    public InitializeProductClassification getProductClassification() throws Exception {
+        InitializeProductClassification initial = new InitializeProductClassification();
+        initial.setMapper(ctx.getBean(ProductMapper.class));
+        initial.init();
+        return initial;
+    }
 }

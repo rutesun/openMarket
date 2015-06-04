@@ -7,9 +7,8 @@ import java.io.File;
 /**
  * Created by rutes_000 on 2015-06-01.
  */
-public class ProductRequest {
+public class ProductRequest extends BaseProduct{
     private String name;
-    private String code;
     private int price;
 
     private String info;
@@ -21,16 +20,13 @@ public class ProductRequest {
     private MultipartFile image;
     private MultipartFile thumbnail;
 
-    private int amount;
+    private int inventoryAmount;
     private int selledAmount;
 
-    public ProductRequest() { }
-
-    public ProductRequest(String name, String code, int price) {
-        this.name = name;
-        this.code = code;
-        this.price = price;
-    }
+    private String classification11;
+    private String classification12;
+    private String classification13;
+    private String classification14;
 
     public String getName() {
         return name;
@@ -38,14 +34,6 @@ public class ProductRequest {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public int getPrice() {
@@ -104,12 +92,12 @@ public class ProductRequest {
         this.thumbnail = thumbnail;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getInventoryAmount() {
+        return inventoryAmount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setInventoryAmount(int amount) {
+        this.inventoryAmount = amount;
     }
 
     public int getSelledAmount() {
@@ -120,42 +108,37 @@ public class ProductRequest {
         this.selledAmount = selledAmount;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ProductRequest)) return false;
-
-        ProductRequest that = (ProductRequest) o;
-
-        if (getPrice() != that.getPrice()) return false;
-        if (getAmount() != that.getAmount()) return false;
-        if (getSelledAmount() != that.getSelledAmount()) return false;
-        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
-        if (getCode() != null ? !getCode().equals(that.getCode()) : that.getCode() != null) return false;
-        if (getInfo() != null ? !getInfo().equals(that.getInfo()) : that.getInfo() != null) return false;
-        if (getSpec() != null ? !getSpec().equals(that.getSpec()) : that.getSpec() != null) return false;
-        if (getImageUrl() != null ? !getImageUrl().equals(that.getImageUrl()) : that.getImageUrl() != null)
-            return false;
-        if (getThumbnailUrl() != null ? !getThumbnailUrl().equals(that.getThumbnailUrl()) : that.getThumbnailUrl() != null)
-            return false;
-        if (getImage() != null ? !getImage().equals(that.getImage()) : that.getImage() != null) return false;
-        return !(getThumbnail() != null ? !getThumbnail().equals(that.getThumbnail()) : that.getThumbnail() != null);
-
+    public String getClassification11() {
+        return classification11;
     }
 
-    @Override
-    public int hashCode() {
-        int result = getName() != null ? getName().hashCode() : 0;
-        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
-        result = 31 * result + getPrice();
-        result = 31 * result + (getInfo() != null ? getInfo().hashCode() : 0);
-        result = 31 * result + (getSpec() != null ? getSpec().hashCode() : 0);
-        result = 31 * result + (getImageUrl() != null ? getImageUrl().hashCode() : 0);
-        result = 31 * result + (getThumbnailUrl() != null ? getThumbnailUrl().hashCode() : 0);
-        result = 31 * result + (getImage() != null ? getImage().hashCode() : 0);
-        result = 31 * result + (getThumbnail() != null ? getThumbnail().hashCode() : 0);
-        result = 31 * result + getAmount();
-        result = 31 * result + getSelledAmount();
-        return result;
+    public void setClassification11(String classification11) {
+        this.classification11 = classification11;
     }
+
+    public String getClassification12() {
+        return classification12;
+    }
+
+    public void setClassification12(String classification12) {
+        this.classification12 = classification12;
+    }
+
+    public String getClassification13() {
+        return classification13;
+    }
+
+    public void setClassification13(String classification13) {
+        this.classification13 = classification13;
+    }
+
+    public String getClassification14() {
+        return classification14;
+    }
+
+    public void setClassification14(String classification14) {
+        this.classification14 = classification14;
+    }
+
+
 }

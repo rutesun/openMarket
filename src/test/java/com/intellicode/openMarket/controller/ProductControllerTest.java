@@ -1,17 +1,7 @@
 package com.intellicode.openMarket.controller;
 
-import com.intellicode.openMarket.config.AppConfig;
-import com.intellicode.openMarket.config.WebAppInitializer;
-import com.intellicode.openMarket.config.WebConfig;
-import junit.framework.TestCase;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.core.env.Environment;
-import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Repeat;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.io.File;
@@ -19,17 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Created by rutes_000 on 2015-06-01.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {WebAppInitializer.class, AppConfig.class, WebConfig.class})
-@WebAppConfiguration
 public class ProductControllerTest extends DefaultWebAppTest {
     private static final int count = 100;
 
