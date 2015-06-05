@@ -38,8 +38,23 @@
     <![endif]-->
 
     <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/resources/js/require.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 </head>
+<script>
+    (require.config({
+        baseUrl: '${pageContext.request.contextPath}/js',
+        //baseUrl: './js',
+        paths: {
+            lodash: './lib/lodash'
+        },
+        shim: {
+            lodash: {
+                exports: '_'
+            }
+        }
+    }));
+</script>
 <body>
 	<div id="wrapper">
  	<!-- Navigation -->
@@ -54,11 +69,13 @@
  	</div>
  	<!-- /#wrapper -->
 
+
+
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     
     <!-- Template Engine and Else on -->
-    <script src="${pageContext.request.contextPath}/resources/js/lib/lodash.js"></script>
+    <%--<script src="${pageContext.request.contextPath}/resources/js/lib/lodash.js"></script>--%>
 
     <!-- Effect -->
     <script src="${pageContext.request.contextPath}/resources/js/lib/effect/smoothscroll.js"></script>
@@ -66,5 +83,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+
+
 </body>
 </html>

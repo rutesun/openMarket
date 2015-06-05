@@ -10,7 +10,7 @@
 <h2>Hello world</h2>
 
 <form class="form-horizontal" method="POST" id="createProduct"
-      name="createProduct" action="${pageContext.request.contextPath}/product/sell" enctype="multipart/form-data"
+      name="createProduct" action="${pageContext.request.contextPath}/product/create" enctype="multipart/form-data"
       encoding="multipart/form-data">
     <div class="row">
         <div class="col-lg-6 control-box">
@@ -56,7 +56,7 @@
                 <label for="sel-classification1" class="col-sm-3 control-label">카테고리1 </label>
 
                 <div class="col-sm-9">
-                    <select name="classification1" id="sel-classification1" class="form-control">
+                    <select name="classification1" id="sel-classification1" class="form-control" >
 
                     </select>
                 </div>
@@ -151,21 +151,25 @@
 
 
 
+        var code1, code2, code3, code4;
 
+        $target1.html(makeClassificationsList(classifications)).prop('selectedIndex',-1).on('change', function(){
+            var selected = $(this).find(":selected");
+            code1 = $(selected).val();
 
-        $target1.html(makeClassificationsList(classifications)).prop('selectedindex',0).on('change', function(){
-            var selected = $(this).find(":selected"),
-                code1 = $(selected).val();
-
-            $target2.html(makeClassificationsList(classifications[code1].next)).prop('selectedindex',0).on('change', function(){
+            $target2.prop('selectedIndex', -1);
+            $target3.prop('selectedIndex', -1);
+            $target4.prop('selectedIndex', -1);
+            $target2.html(makeClassificationsList(classifications[code1].next)).prop('selectedIndex',-1).on('change', function(){
                 selected = $(this).find(":selected");
                 code2 = $(selected).val();
-
-                $target3.html(makeClassificationsList(classifications[code1].next[code2].next)).prop('selectedindex',0).on('change', function(){
+                $target3.prop('selectedIndex', -1);
+                $target4.prop('selectedIndex', -1);
+                $target3.html(makeClassificationsList(classifications[code1].next[code2].next)).prop('selectedIndex',-1).on('change', function(){
                     selected = $(this).find(":selected");
                     code3 = $(selected).val();
 
-                    $target4.html(makeClassificationsList(classifications[code1].next[code2].next[code3].next)).prop('selectedindex',0);
+                    $target4.html(makeClassificationsList(classifications[code1].next[code2].next[code3].next)).prop('selectedIndex',-1);
                 })
             });
         });

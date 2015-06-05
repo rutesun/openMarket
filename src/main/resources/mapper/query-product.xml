@@ -6,8 +6,8 @@
             id="insertProduct"
             parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
             >
-		insert into tb_product (code, name, price, company_id, info, spec, insert_date, insert_timestamp, inventory_amount, image_url, thumbnail_url)
-		  values(#{code}, #{name}, #{price}, #{companyId}, #{info}, #{spec}, (select now()), (select UNIX_TIMESTAMP()), #{inventoryAmount}, #{imageUrl}, #{thumbnailUrl})
+		insert into tb_product (code, name, price, company_id, info, spec, insert_date, insert_timestamp, amount, inventory_amount, image_url, thumbnail_url, classification1, classification2, classification3, classification4)
+		  values(#{code}, #{name}, #{price}, #{companyId}, #{info}, #{spec}, (select now()), (select UNIX_TIMESTAMP()), #{amount}, #{amount}, #{imageUrl}, #{thumbnailUrl}, #{classification1}, #{classification2}, #{classification3}, #{classification4})
 	</insert>
 
     <insert
@@ -63,14 +63,14 @@
         where
         1=1
         <if test="code != null">
-            AND code = #{code}
+            AND sel.code = #{code}
         </if>
         <if test="companyId != null">
-            AND company_id = #{companyId}
+            AND sel.company_id = #{companyId}
         </if>
         AND
-        (tb_product_selling.start_timestamp <![CDATA[ <= ]]> (select UNIX_TIMESTAMP())
-        AND tb_product_selling.end_timestamp <![CDATA[ >= ]]> (select UNIX_TIMESTAMP()))
+        (sel.start_timestamp <![CDATA[ <= ]]> (select UNIX_TIMESTAMP())
+        AND sel.end_timestamp <![CDATA[ >= ]]> (select UNIX_TIMESTAMP()))
     </select>
 
     <select

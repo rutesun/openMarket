@@ -348,3 +348,114 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+
+*********************************
+** list **
+*********************************
+.main-recommend .recommend-list {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-unit ul {
+    width: 9999px;
+    overflow: hidden;
+}
+
+#contents {
+    width: 980px;
+    margin: 0 auto;
+}
+#contents {
+    z-index: 1;
+}
+
+#header, #gnb, #contents, #footer {
+    position: relative;
+}
+
+.main-recommend h2.before-login {
+    width: 218px;
+}
+.main-recommend h2 {
+    margin-left: 3px;
+    background-position: 0 0;
+}
+.main-section h2 {
+    height: 25px;
+    margin-bottom: 15px;
+    text-indent: -9999em;
+}
+dl, dt, dd, ul, ol, menu, li {
+    list-style: none;
+}
+
+.main-recommend .recommend-list ul li {
+    float: left;
+    margin-right: 15px;
+    position: relative;
+    width: 182px;
+    border: 1px solid #d6d6d6;
+    border-bottom: 1px solid #b8b8b8;
+}
+
+.main-recommend .recommend-list ul li a {
+    display: block;
+    height: 280px;
+    padding: 6px 6px 0;
+    background: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.main-recommend .recommend-list img {
+    width: 168px;
+    height: 168px;
+}
+img {
+    vertical-align: top;
+}
+
+.main-recommend .recommend-list .title {
+    height: 14px;
+    padding: 15px 0 0 3px;
+    font-size: 12px;
+    color: #33353d;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    line-height: 140%;
+    overflow: hidden;
+}
+.main-recommend .recommend-list .prod-price {
+    height: 26px;
+    overflow: hidden;
+    padding: 17px 0 0 3px;
+    color: #33353d;
+    font-size: 14px;
+}
+
+address, caption, cite, code, dfn, em, var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+.main-recommend .recommend-list .prod-price .coupang-price {
+    width: 52px;
+    background-position: -289px -370px;
+}
+.main-recommend .recommend-list .prod-price .prod-type {
+    width: 51px;
+    height: 20px;
+    margin-right: 7px;
+    text-indent: -9999em;
+}
+.main-recommend .recommend-list .prod-price .prod-type {
+    width: 51px;
+    height: 20px;
+    margin-right: 7px;
+    text-indent: -9999em;
+}
+.main-recommend .recommend-list .prod-price span {
+    float: left;
+}

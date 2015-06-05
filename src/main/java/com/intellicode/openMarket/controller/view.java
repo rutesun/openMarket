@@ -42,8 +42,7 @@ public class View {
     public ModelAndView showList(Locale locale, HttpServletRequest request, BaseProduct req) throws Exception{
         ModelAndView mnv = new ModelAndView("listProduct");
 
-        req.setCompanyId("RHTwsgyJfn");
-        mnv.addObject("productList", productService.selectSellingProduct(req));
+        mnv.addObject("companyId", "RHTwsgyJfn");
         return mnv;
     }
 

@@ -2,8 +2,6 @@ package com.intellicode.openMarket.vo.product;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-
 /**
  * Created by rutes_000 on 2015-06-01.
  */
@@ -20,13 +18,14 @@ public class ProductRequest extends BaseProduct{
     private MultipartFile image;
     private MultipartFile thumbnail;
 
+    private int amount;
     private int inventoryAmount;
     private int selledAmount;
 
-    private String classification11;
-    private String classification12;
-    private String classification13;
-    private String classification14;
+    private String classification1;
+    private String classification2;
+    private String classification3;
+    private String classification4;
 
     public String getName() {
         return name;
@@ -92,6 +91,14 @@ public class ProductRequest extends BaseProduct{
         this.thumbnail = thumbnail;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public int getInventoryAmount() {
         return inventoryAmount;
     }
@@ -108,37 +115,35 @@ public class ProductRequest extends BaseProduct{
         this.selledAmount = selledAmount;
     }
 
-    public String getClassification11() {
-        return classification11;
+    public String getClassification1() {
+        return classification1;
     }
 
-    public void setClassification11(String classification11) {
-        this.classification11 = classification11;
+    public void setClassification1(String classification1) {
+        this.classification1 = classification1;
     }
 
-    public String getClassification12() {
-        return classification12;
+    public String getClassification2() {
+        return classification2;
     }
 
-    public void setClassification12(String classification12) {
-        this.classification12 = classification12;
+    public void setClassification2(String classification2) {
+        this.classification2 = classification2;
     }
 
-    public String getClassification13() {
-        return classification13;
+    public String getClassification3() {
+        return classification3;
     }
 
-    public void setClassification13(String classification13) {
-        this.classification13 = classification13;
+    public void setClassification3(String classification3) {
+        this.classification3 = classification3;
     }
 
-    public String getClassification14() {
-        return classification14;
+    public String getClassification4() {
+        return classification4;
     }
 
-    public void setClassification14(String classification14) {
-        this.classification14 = classification14;
+    public void setClassification4(String classification4) {
+        this.classification4 = classification4;
     }
-
-
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -41,10 +42,13 @@ public class DefaultProductService implements ProductService{
     public Status insertProduct(ProductRequest product) throws Exception {
 
         System.out.println("Start : "+ System.currentTimeMillis());
-        String fileId = CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getImage());
+        String mainImageId = CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getImage()),
+            subImageId = product.getThumbnail() != null ?
+                    CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getThumbnail()): mainImageId;
         System.out.println("End : "+System.currentTimeMillis());
 
-        product.setImageUrl(fileId);
+        product.setImageUrl(URLEncoder.encode(mainImageId, "UTF-8"));
+        product.setThumbnailUrl(URLEncoder.encode(subImageId, "UTF-8"));
         boolean ret = productMapper.insertProduct(product);
         return new Status("OK");
     }

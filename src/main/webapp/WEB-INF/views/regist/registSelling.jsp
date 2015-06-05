@@ -82,18 +82,18 @@
                 <label for="thumbnail" class="col-sm-3 control-label">상품 썸네일 이미지</label>
 
                 <div class="col-sm-9">
-                    <img id="thumbnail" src="${productList[0].thumbnailUrl}" alt=""/>
+                    <img id="thumbnail" src="${pageContext.request.contextPath}/product_img/${productList[0].thumbnailUrl}" alt=""/>
                 </div>
             </div>
             <div class="form-group">
-                <label for="amount" class="col-sm-3 control-label">재고</label>
+                <label for="inventoryAmount" class="col-sm-3 control-label">재고</label>
 
                 <div class="col-sm-9">
-                    <p class="form-control" id="amount">${productList[0].inventoryAmount}</p>
+                    <p class="form-control" id="inventoryAmount">${productList[0].inventoryAmount}</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="amount" class="col-sm-3 control-label">누적 판매량</label>
+                <label for="selledAmount" class="col-sm-3 control-label">누적 판매량</label>
 
                 <div class="col-sm-9">
                     <p class="form-control" id="selledAmount">${productList[0].selledAmount}</p>
@@ -151,11 +151,25 @@
         return false;
     });
 
-    var result = JSON.parse('${parsed}');
-    console.log(result);
+    $(function(){
+	    var result = $.parseJSON('${parsed}');
+	    
+	    var image_prefix = '${pageContext.request.contextPath}/product_img/'
 
-    $('#sel-product').on('change changed selected',function(e){
-        console.log(e);
+	    $('#sel-product').on('change',function(e){
+	        var product = result[this.selectedIndex];
+            console.log("Product = ", product);
+	        $('#code').html(product.code);
+	        $('#name').html(product.name);
+	        $('#price').html(product.price);
+	        $('#info').html(product.info);
+	        $('#spec').html(product.spec);
+	        $('#image').attr('src',image_prefix + product.imageUrl);
+	        $('#thumbnail').attr('src',image_prefix + product.thumbnailUrl);
+	        $('#inventoryAmount').html(product.inventoryAmount);
+	        $('#selledAmount').html(product.selledAmount)
+	        $('#sellingAmount', '#start_date', '#end_date').val("");
+	    });
     });
 </script>
 
