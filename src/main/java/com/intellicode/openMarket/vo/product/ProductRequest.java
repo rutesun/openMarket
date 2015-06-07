@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
  * Created by rutes_000 on 2015-06-01.
  */
 public class ProductRequest extends BaseProduct{
-    private String name;
     private int price;
 
     private String info;
@@ -26,14 +25,6 @@ public class ProductRequest extends BaseProduct{
     private String classification2;
     private String classification3;
     private String classification4;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getPrice() {
         return price;

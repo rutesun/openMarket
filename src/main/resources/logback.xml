@@ -69,6 +69,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 		<level value="DEBUG" />
 	</logger>
 	-->
+
 	
 	<logger name="org.mybatis.spring.SqlSessionUtils">
 		<level value="info" />
@@ -77,7 +78,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 		<level value="debug" />
 	</logger> 
 
-    <root level="info">
+    <root level="DEBUG">
         <appender-ref ref="console"/>
         <appender-ref ref="dailyRollingFileAppender"/>
     </root>

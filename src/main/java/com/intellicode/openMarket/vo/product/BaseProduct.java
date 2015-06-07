@@ -7,6 +7,7 @@ public class BaseProduct {
     private String id;
     private String code;
     private String companyId;
+    private String name;
 
     public BaseProduct() {
     }
@@ -40,24 +41,11 @@ public class BaseProduct {
         this.companyId = companyId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BaseProduct)) return false;
-
-        BaseProduct that = (BaseProduct) o;
-
-        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
-        if (getCode() != null ? !getCode().equals(that.getCode()) : that.getCode() != null) return false;
-        return !(getCompanyId() != null ? !getCompanyId().equals(that.getCompanyId()) : that.getCompanyId() != null);
-
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
-        result = 31 * result + (getCompanyId() != null ? getCompanyId().hashCode() : 0);
-        return result;
+    public void setName(String name) {
+        this.name = name;
     }
 }

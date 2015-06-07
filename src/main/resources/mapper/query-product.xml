@@ -14,8 +14,8 @@
             id="registSellingProduct"
             parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
             >
-		insert into tb_product_selling (code, company_id, selling_amount, start_date, start_timestamp, end_date, end_timestamp)
-		  values(#{code}, #{companyId}, #{sellingAmount}, (SELECT FROM_UNIXTIME(#{startTimestamp},'%Y-%m-%d %H:%i:%s')), #{startTimestamp}, (SELECT FROM_UNIXTIME(#{endTimestamp},'%Y-%m-%d %H:%i:%s')), #{endTimestamp})
+		insert into tb_product_selling (code, company_id, selling_amount, start_date, start_timestamp, end_date, end_timestamp, register_date, register_timestamp)
+		  values(#{code}, #{companyId}, #{sellingAmount}, (SELECT FROM_UNIXTIME(#{startTimestamp},'%Y-%m-%d %H:%i:%s')), #{startTimestamp}, (SELECT FROM_UNIXTIME(#{endTimestamp},'%Y-%m-%d %H:%i:%s')), #{endTimestamp}. (select UNIX_TIMESTAMP()), (SELECT NOW()))
 	</insert>
 
     <update
@@ -55,22 +55,56 @@
 
     <select
             id="selectSellingProduct"
-            parameterType="com.intellicode.openMarket.vo.product.BaseProduct"
-            resultType="com.intellicode.openMarket.vo.product.RegistSellingRequest"
+            parameterType="com.intellicode.openMarket.vo.product.SearchRequest"
+            resultType="com.intellicode.openMarket.vo.product.ProductResponse"
             >
-        select *
+        select *, prod.thumbnail_url thumbnailUrl, prod.image_url imageUrl
         from tb_product_selling sel inner join tb_product prod on sel.code = prod.code
         where
         1=1
+        <if test="id != null">
+            AND sel.id = #{id}
+        </if>
         <if test="code != null">
             AND sel.code = #{code}
         </if>
         <if test="companyId != null">
             AND sel.company_id = #{companyId}
         </if>
+        <if test="name != null">
+            AND prod.name like "%${name}%"
+        </if>
+        <if test="classification1 != null">
+            AND prod.classification1 = #{classification1}
+        </if>
+        <if test="classification2 != null">
+            AND prod.classification2 = #{classification2}
+        </if>
+        <if test="classification3 != null">
+            AND prod.classification3 = #{classification3}
+        </if>
+        <if test="classification4 != null">
+            AND prod.classification4 = #{classification4}
+        </if>
         AND
         (sel.start_timestamp <![CDATA[ <= ]]> (select UNIX_TIMESTAMP())
         AND sel.end_timestamp <![CDATA[ >= ]]> (select UNIX_TIMESTAMP()))
+    </select>
+
+    <select
+            id="selectRecentRegisteredSellingProduct"
+            parameterType="int"
+            resultType="com.intellicode.openMarket.vo.product.ProductResponse"
+            >
+        select *, prod.thumbnail_url thumbnailUrl, prod.image_url imageUrl
+        from tb_product_selling sel inner join tb_product prod on sel.code = prod.code
+        where
+        1=1
+        AND
+        (sel.start_timestamp <![CDATA[ <= ]]> (select UNIX_TIMESTAMP())
+        AND sel.end_timestamp <![CDATA[ >= ]]> (select UNIX_TIMESTAMP()))
+        order by sel.register_date desc
+        limit #{param1}
     </select>
 
     <select

@@ -5,12 +5,11 @@ import com.intellicode.openMarket.vo.Status;
 import com.intellicode.openMarket.vo.product.BaseProduct;
 import com.intellicode.openMarket.vo.product.ProductRequest;
 import com.intellicode.openMarket.vo.product.RegistSellingRequest;
+import com.intellicode.openMarket.vo.product.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,7 +54,7 @@ public class ProductController {
 
     @RequestMapping(value = "/sell", method = RequestMethod.GET)
     public List<?> listSellingProduct(Locale locale, HttpServletRequest request, HttpServletResponse response
-            , @ModelAttribute BaseProduct req
+            , @ModelAttribute SearchRequest req
     ) throws Exception {
 
         req.setCompanyId("RHTwsgyJfn");
@@ -73,4 +72,6 @@ public class ProductController {
         ) throws Exception {
         return new Status("OK");
     }
+
+
 }

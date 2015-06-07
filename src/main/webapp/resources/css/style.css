@@ -22,7 +22,8 @@ body {
     #page-wrapper {
         position: inherit;
         margin: 20px 0 0 0px;
-        padding: 0 30px;        
+        padding: 0 30px;
+        padding-top: 40px;
     }
 }
 
@@ -351,111 +352,195 @@ table.dataTable thead .sorting:after {
 
 
 *********************************
-** list **
+**  **
 *********************************
-.main-recommend .recommend-list {
+.home_tmon .today_recom_deal {
+    margin-top: 10px;
+}
+.wrap_deal_lst {
     position: relative;
     overflow: hidden;
+    clear: both;
 }
-
-.slide-unit ul {
-    width: 9999px;
+.wrap_deal_lst .lst {
     overflow: hidden;
+    margin-right: -12px;
+    zoom: 1;
 }
-
-#contents {
-    width: 980px;
-    margin: 0 auto;
-}
-#contents {
-    z-index: 1;
-}
-
-#header, #gnb, #contents, #footer {
-    position: relative;
-}
-
-.main-recommend h2.before-login {
-    width: 218px;
-}
-.main-recommend h2 {
-    margin-left: 3px;
-    background-position: 0 0;
-}
-.main-section h2 {
-    height: 25px;
-    margin-bottom: 15px;
-    text-indent: -9999em;
-}
-dl, dt, dd, ul, ol, menu, li {
-    list-style: none;
-}
-
-.main-recommend .recommend-list ul li {
+.wrap_deal_lst .lst li {
     float: left;
-    margin-right: 15px;
     position: relative;
-    width: 182px;
-    border: 1px solid #d6d6d6;
-    border-bottom: 1px solid #b8b8b8;
+    width: 322px;
+    height: 482px;
+    margin: 0 12px 20px 0;
+    background: #fff url(http://img1.tmon.kr/static/img/sp_deallst_box.png?v=1433402000 ) no-repeat;
+}
+.wrap_deal_lst .lst li {
+    float: left;
+    position: relative;
+    width: 322px;
+    height: 482px;
+    margin: 0 12px 20px 0;
+    background: #fff url(http://img1.tmon.kr/static/img/sp_deallst_box.png?v=1433402000 ) no-repeat;
+}
+.wrap_deal_lst .lst li .thmb .edge {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 329px;
+    border: 1px solid #000;
+    border-bottom: 0;
+    opacity: 0.12;
+    filter: alpha(opacity=12);
+    cursor: pointer;
+}
+.wrap_deal_lst .lst li .detail {
+    position: relative;
+    height: 120px;
+    padding: 0 10px 0 13px;
+}
+.wrap_deal_lst .lst li .detail .summary {
+    overflow: hidden;
+    height: 13px;
+    margin-bottom: 4px;
+    padding-top: 15px;
+    font-size: 11px;
+    line-height: 13px;
+    color: #828284;
+    letter-spacing: -1px;
+}
+.wrap_deal_lst .lst li .detail .subject {
+    display: block;
+    overflow: hidden;
+    max-width: 100%;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    color: #000;
+    letter-spacing: -1px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.wrap_deal_lst .lst li .detail .amounts {
+    float: left;
+    overflow: hidden;
+    margin-top: 8px;
+}
+.wrap_deal_lst .lst li .detail .amounts .tmon_price {
+    float: left;
+    width: 37px;
+    height: 30px;
+    margin: 1px 9px 0 0;
+    background: url(http://img2.tmon.kr/static/img/sp_deal_lst2.png?v=1433402000 ) no-repeat -885px -475px;
+    text-indent: -9999px;
+}
+.wrap_deal_lst .lst li .detail .amounts .price {
+    float: left;
+}
+.wrap_deal_lst .lst li .detail .amounts .price .sale {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: #333;
+}
+.blind {
+    overflow: hidden;
+    position: absolute;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+}
+.wrap_deal_lst .lst li .detail .amounts .price .sale em {
+    font-size: 17px;
+}
+.wrap_deal_lst .lst li .detail .amounts .price em {
+    position: relative;
+    top: 1px;
+    font-family: tahoma;
+    font-size: 12px;
+}
+em, address, i {
+    font-style: normal;
+}
+.wrap_deal_lst .lst li .detail .amounts .price .sale {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: #333;
+}
+.wrap_deal_lst .lst li .detail .amounts .price_info {
+    overflow: hidden;
+    clear: both;
+    position: absolute;
+    z-index: 20;
+    max-width: 240px;
+    padding-top: 6px;
+    padding-right: 1px;
+    font-weight: normal;
+    font-size: 11px;
+    color: #828284;
+    letter-spacing: -1px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.wrap_deal_lst .lst li .detail .people {
+    position: absolute;
+    top: 78px;
+    right: 15px;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: -1px;
+}
+.wrap_deal_lst .lst li .detail .people em {
+    position: relative;
+    top: 1px;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: tahoma;
+    color: #058aff;
+    letter-spacing: 0;
+}
+.wrap_deal_lst .lst li .option {
+    height: 30px;
+    margin: 0 1px;
+    padding: 0 9px 0 14px;
+    border-top: 1px solid #f0f0f0;
 }
 
-.main-recommend .recommend-list ul li a {
-    display: block;
-    height: 280px;
-    padding: 6px 6px 0;
-    background: #fff;
-    border: 1px solid #fff;
+.wrap_deal_lst .lst li .option .sico {
+    float: left;
+    margin: 6px 4px 0 0;
+}
+.wrap_deal_lst .lst li .option .zzim {
+    float: right;
+}
+.wrap_deal_lst .lst li .option .zzim a.btn_zzim {
+    display: inline-block;
+    position: relative;
+    width: 17px;
+    height: 16px;
+    padding: 7px 6px 6px;
+    z-index: 20;
+}
+.wrap_deal_lst .lst li .option .zzim a.btn_zzim span {
+    display: inline-block;
+    overflow: hidden;
+    width: 17px;
+    height: 16px;
+    background: url(http://img2.tmon.kr/static/img/sp_deal_lst2.png?v=1433402000 ) no-repeat -365px -405px;
+    line-height: 200px;
+    vertical-align: middle;
     cursor: pointer;
 }
 
-.main-recommend .recommend-list img {
-    width: 168px;
-    height: 168px;
-}
-img {
-    vertical-align: top;
-}
-
-.main-recommend .recommend-list .title {
-    height: 14px;
-    padding: 15px 0 0 3px;
-    font-size: 12px;
-    color: #33353d;
-    font-weight: normal;
-    text-overflow: ellipsis;
-    line-height: 140%;
-    overflow: hidden;
-}
-.main-recommend .recommend-list .prod-price {
-    height: 26px;
-    overflow: hidden;
-    padding: 17px 0 0 3px;
-    color: #33353d;
-    font-size: 14px;
-}
-
-address, caption, cite, code, dfn, em, var {
-    font-style: normal;
-    font-weight: normal;
-}
-
-.main-recommend .recommend-list .prod-price .coupang-price {
-    width: 52px;
-    background-position: -289px -370px;
-}
-.main-recommend .recommend-list .prod-price .prod-type {
-    width: 51px;
-    height: 20px;
-    margin-right: 7px;
-    text-indent: -9999em;
-}
-.main-recommend .recommend-list .prod-price .prod-type {
-    width: 51px;
-    height: 20px;
-    margin-right: 7px;
-    text-indent: -9999em;
-}
-.main-recommend .recommend-list .prod-price span {
-    float: left;
+ul.lst, li {
+    list-style: none;
 }

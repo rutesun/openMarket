@@ -63,7 +63,15 @@
  	 	</div> 
  	 	
  	 	<div id="page-wrapper">
-		 	<tiles:insertAttribute name="body" flush="false" />
+            <div class="container-fluid">
+                <div class="col-lg-3 col-md-3">
+                    <tiles:insertAttribute name="left" flush="false" />
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <tiles:insertAttribute name="body" flush="false" />
+                </div>
+            </div>
+
 		</div>
 		<!-- /#page-wrapper -->
  	</div>

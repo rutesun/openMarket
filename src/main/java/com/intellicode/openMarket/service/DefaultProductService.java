@@ -3,10 +3,7 @@ package com.intellicode.openMarket.service;
 import com.intellicode.openMarket.mapper.ProductMapper;
 import com.intellicode.openMarket.util.interceptor.CustomFileUtils;
 import com.intellicode.openMarket.vo.Status;
-import com.intellicode.openMarket.vo.product.BaseProduct;
-import com.intellicode.openMarket.vo.product.ChangeInventory;
-import com.intellicode.openMarket.vo.product.ProductRequest;
-import com.intellicode.openMarket.vo.product.RegistSellingRequest;
+import com.intellicode.openMarket.vo.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -76,12 +73,17 @@ public class DefaultProductService implements ProductService{
     }
 
     @Override
-    public List<ProductRequest> selectSellingProduct(BaseProduct product) throws Exception {
-        return productMapper.selectSellingProduct(product);
+    public List<ProductResponse> selectSellingProduct(SearchRequest product) throws Exception {
+        return productMapper.selectSellingProduct((SearchRequest)product);
     }
 
     @Override
-    public List<ProductRequest> selectProduct(BaseProduct product) throws Exception {
+    public List<ProductResponse> selectRecentRegisteredSellingProduct(int top) throws Exception {
+        return productMapper.selectRecentRegisteredSellingProduct(top);
+    }
+
+    @Override
+    public List<ProductResponse> selectProduct(BaseProduct product) throws Exception {
         return productMapper.selectProduct(product);
     }
 }

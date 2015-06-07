@@ -20,10 +20,6 @@
 <div id="nav-menu" class="collapse navbar-left navbar-collapse" >
   <ul class="nav navbar-nav">
     <li class="">
-    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			Dropdown
-			<i class="fa fa-caret-down"></i>
-		</a>
     	<ul class="dropdown-menu wow fadeInDown animated" role="menu" aria-labelledby="dropdownMenu1">
 	        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
 	        <li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/menu/menu3">Another action</a></li>
@@ -32,16 +28,19 @@
 	    </ul>
     </li>
     <li class="">
-    	<a href="${pageContext.request.contextPath}/dashboard/admin">홈</a>
-    </li>
-    <li class="">
-    	<a href="${pageContext.request.contextPath}/menu/menu3">관개계획</a>
-    </li>
-     <li class="">
-    	<a href="${pageContext.request.contextPath}/menu/thiessen">티센망도</a>
-    </li>
-     <li class="">
-    	<a href="${pageContext.request.contextPath}/menu/groundPlan">계획평면도</a>
+        <form class="form-inline" method="GET" id="sellingProduct" action="${pageContext.request.contextPath}/view/selling/search">
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <button type="submit" id="search">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="" min="0">
+                </div>
+            </div>
+        </form>
     </li>
    
 
@@ -225,3 +224,7 @@
 	<!-- /.dropdown -->
 </ul>
 <!-- /.navbar-top-links -->
+
+<script type="text/javascript">
+
+</script>

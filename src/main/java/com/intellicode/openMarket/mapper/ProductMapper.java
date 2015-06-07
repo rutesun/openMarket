@@ -22,9 +22,11 @@ public interface ProductMapper {
 
     boolean pauseSellingProduct(BaseProduct product) throws Exception;
 
-    List<ProductRequest> selectSellingProduct(BaseProduct product) throws Exception;
+    List<ProductResponse> selectSellingProduct(SearchRequest product) throws Exception;
 
-    List<ProductRequest> selectProduct(BaseProduct product) throws Exception;
+    List<ProductResponse> selectRecentRegisteredSellingProduct(int top) throws Exception;
+
+    List<ProductResponse> selectProduct(BaseProduct product) throws Exception;
 
     List<ProductClassification> selectProductClassification1() throws Exception;
     List<ProductClassification> selectProductClassification2(ProductClassification classific) throws Exception;
