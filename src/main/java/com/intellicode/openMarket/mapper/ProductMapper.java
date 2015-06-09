@@ -32,4 +32,9 @@ public interface ProductMapper {
     List<ProductClassification> selectProductClassification2(ProductClassification classific) throws Exception;
     List<ProductClassification> selectProductClassification3(ProductClassification classific) throws Exception;
     List<ProductClassification> selectProductClassification4(ProductClassification classific) throws Exception;
+
+    boolean insertPurchaseLog(PurchaseRequest purchaseRequest) throws Exception;
+    boolean updateDeliveryLog() throws Exception;
+    boolean updateKeepingLog() throws Exception;
+
 }

@@ -16,16 +16,36 @@
             </div>
         </div>
         <div class="col-lg-9">
-            <p>${productInfo[0].name}</p>
-            <p>${productInfo[0].info}</p>
-            <p>${productInfo[0].spec}</p>
-            <p>${productInfo[0].price}</p>
-
+            <div class="row">
+                <p>${productInfo[0].name}</p>
+                <p>${productInfo[0].info}</p>
+                <p>${productInfo[0].spec}</p>
+                <p id="price">${productInfo[0].price}</p>
+            </div>
+            <div class="row">
+                <form action="${pageContext.request.contextPath}/product/purchase" method="POST">
+                    <div class="form-group">
+                        <label for="count" class="col-sm-3 control-label">구매 수량</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="count" id="count" placeholder="구매 수량"
+                                   min="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">예상 금액</span>
+                        <div class="">
+                            <span id="expectedAmount"></span>원
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">구매</button>
+                    </div>
+                </form>
+            </div>
     </div>
     </div>
 
     <div class="row" class="">
-
 
     </div>
 </div>
@@ -34,10 +54,25 @@
 <script type="text/javascript">
     var $target = $('#home_todayshot');
     require(['jquery', 'lodash', 'template/deal.template'], function($, _, template){
-        var classifications = $.parseJSON('${classifications}')
+        var classifications = $.parseJSON('${classifications}');
         var productInfo = '${productInfo}';
         console.log(productInfo);
 
+    });
+
+    $('#count').on('change', function(e){
+        var $_taret = $('#expectedAmount'),
+                price = $('#price').html();
+        return (function(e){
+            var res = Number(price * $(this).val());
+            if(res > ${userInfo.accountBalance}){
+                alert("예산 초과 !!");
+
+            } else{
+                $_taret.text(res);
+
+            }
+        }).call(this, e);
     });
 
 

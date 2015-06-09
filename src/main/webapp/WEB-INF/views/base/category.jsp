@@ -12,14 +12,13 @@
         <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
         <span>카테고리</span>
     </a>
-
 </div>
 
 <script type="text/javascript">
-    var snippet = '<a href="/openMarket/view/selling/list?category=\${code}" class="list-group-item" data-code="\${code}">\${name}</a>';
+    var snippet = '<a href="/openMarket/view/selling/search?classification1=\${code}" class="list-group-item" data-code="\${code}">\${name}</a>';
     var result = "";
     require(['jquery', 'lodash', 'template/deal.template'], function($, _, template){
-        var classifications = $.parseJSON('${classifications}')
+        var classifications = $.parseJSON('${classifications}');
         for(var cate in classifications){
             result += _.template(snippet, classifications[cate]);
         }

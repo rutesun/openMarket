@@ -174,5 +174,78 @@
           ccode = #{code3}
     </select>
 
+    <insert
+            id="insertPurchaseLog"
+            parameterType="com.intellicode.openMarket.vo.product.PurchaseRequest">
+
+        insert into tb_product_purchase (product_id, product_code, customer_id, price, count, register_date, register_timestamp)
+        values (#{productId}, (select code tb_product_selling where id = #{productId}), #{customerId}, #{price}, #{count}, (select now()), (select UNIX_TIMESTAMP()))
+    </insert>
+
+    <select
+        id="selectPurchaseLog"
+        resultType=""
+            >
+        select *
+        FROM
+        tb_product_purchase pur inner join tb_product on tb_product_purchase.product_code = tb_product.code
+        WHERE
+         1=1
+        <if test="product_code != null">
+            AND product_code = #{productCode}
+        </if>
+        <if test="customer_id != null">
+            AND customer_id = #{userId}
+        </if>
+
+
+    </select>
+
+    <update
+            id="updateDeliveryLog"
+            parameterType="com.intellicode.openMarket.vo.delivery.Delivery">
+
+        update tb_product_purchase
+        SET
+          delivery_flag = #{delivery_flag},
+          delivery_id = #{deliviryId},
+          delivery_date = (select now()),
+          delivery_timestamp = (select UNIX_TIMESTAMP())
+          WHERE
+          1=1
+          AND
+          id = #{productId}
+    </update>
+
+    <update
+            id="updateArrivalLog"
+            parameterType="">
+
+        update tb_product_purchase
+        SET
+        delivery_flag = #{delivery_flag},
+        arrival_date = (select now()),
+        arrival_timestamp = (select UNIX_TIMESTAMP())
+        WHERE
+        1=1
+        AND
+        id = #{productId}
+    </update>
+
+    <update
+            id="updateKeepingLog"
+            parameterType="">
+
+        update tb_product_purchase
+        SET
+        delivery_flag =  #{delivery_flag},
+        keeping_id = #{deliviryId},
+        keeping_date = (select now()),
+        keeping_timestamp = (select UNIX_TIMESTAMP())
+        WHERE
+          1=1
+          AND
+          id = #{productId}
+    </update>
 
 </mapper>

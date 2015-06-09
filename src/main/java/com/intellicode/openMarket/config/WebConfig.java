@@ -1,6 +1,7 @@
 package com.intellicode.openMarket.config;
 
 import com.intellicode.openMarket.util.interceptor.MultiFileInterceptor;
+import com.intellicode.openMarket.util.interceptor.SessionInterceptor;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartResolver;
@@ -79,7 +80,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(webContentInterceptor());
-    registry.addInterceptor(new MultiFileInterceptor()).addPathPatterns("/product/create");
+    registry.addInterceptor(new SessionInterceptor());
+    registry.addInterceptor(new MultiFileInterceptor()).addPathPatterns("/view/product/create");
   }
 
   @Bean
