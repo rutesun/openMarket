@@ -15,7 +15,6 @@
      </div>
 </div>
 
-
 <script type="text/javascript">
     var $target = $('#home_todayshot');
     require(['jquery', 'lodash', 'template/deal.template'], function($, _, template){

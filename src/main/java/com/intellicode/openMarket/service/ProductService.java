@@ -1,10 +1,9 @@
 package com.intellicode.openMarket.service;
 
 import com.intellicode.openMarket.vo.Status;
-import com.intellicode.openMarket.vo.product.BaseProduct;
-import com.intellicode.openMarket.vo.product.ProductRequest;
-import com.intellicode.openMarket.vo.product.ProductResponse;
-import com.intellicode.openMarket.vo.product.SearchRequest;
+import com.intellicode.openMarket.vo.delivery.ArrivalRequest;
+import com.intellicode.openMarket.vo.delivery.Delivery;
+import com.intellicode.openMarket.vo.product.*;
 
 import java.util.List;
 
@@ -26,4 +25,8 @@ public interface ProductService {
     List<ProductResponse> selectRecentRegisteredSellingProduct(int top) throws Exception;
 
     List<ProductResponse> selectProduct(BaseProduct product) throws Exception;
+
+    Status insertPurchaseLog(PurchaseRequest purchaseRequest) throws Exception;
+    Status updateDeliveryLog(Delivery delivery) throws Exception;
+    Status updateKeepingLog(ArrivalRequest arrivalRequest) throws Exception;
 }

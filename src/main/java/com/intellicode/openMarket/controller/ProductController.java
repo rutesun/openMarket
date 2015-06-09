@@ -3,6 +3,7 @@ package com.intellicode.openMarket.controller;
 import com.intellicode.openMarket.service.ProductService;
 import com.intellicode.openMarket.vo.Status;
 import com.intellicode.openMarket.vo.product.ProductRequest;
+import com.intellicode.openMarket.vo.product.PurchaseRequest;
 import com.intellicode.openMarket.vo.product.RegistSellingRequest;
 import com.intellicode.openMarket.vo.product.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,8 +77,9 @@ public class ProductController {
 
     @RequestMapping(value = "/purchase", method = RequestMethod.POST)
     public Status purchase(Locale locale, HttpServletRequest request, HttpServletResponse response
+                   , PurchaseRequest purchaseRequest
     ) throws Exception {
-        return new Status("OK");
+        return productService.insertPurchaseLog(purchaseRequest);
     }
 
 }

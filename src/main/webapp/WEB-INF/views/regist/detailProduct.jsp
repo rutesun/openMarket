@@ -24,6 +24,7 @@
             </div>
             <div class="row">
                 <form action="${pageContext.request.contextPath}/product/purchase" method="POST">
+                    <input type="hidden" name="productId" id="productId" value="${productInfo[0].id}"/>
                     <div class="form-group">
                         <label for="count" class="col-sm-3 control-label">구매 수량</label>
                         <div class="col-sm-9">

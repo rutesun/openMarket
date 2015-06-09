@@ -3,6 +3,8 @@ package com.intellicode.openMarket.service;
 import com.intellicode.openMarket.mapper.ProductMapper;
 import com.intellicode.openMarket.util.interceptor.CustomFileUtils;
 import com.intellicode.openMarket.vo.Status;
+import com.intellicode.openMarket.vo.delivery.ArrivalRequest;
+import com.intellicode.openMarket.vo.delivery.Delivery;
 import com.intellicode.openMarket.vo.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -85,5 +87,23 @@ public class DefaultProductService implements ProductService{
     @Override
     public List<ProductResponse> selectProduct(BaseProduct product) throws Exception {
         return productMapper.selectProduct(product);
+    }
+
+    @Override
+    public Status insertPurchaseLog(PurchaseRequest purchaseRequest) throws Exception {
+        productMapper.insertPurchaseLog(purchaseRequest);
+        return new Status("OK");
+    }
+
+    @Override
+    public Status updateDeliveryLog(Delivery delivery) throws Exception {
+        productMapper.updateDeliveryLog(delivery);
+        return new Status("OK");
+    }
+
+    @Override
+    public Status updateKeepingLog(ArrivalRequest arrivalRequest) throws Exception {
+        productMapper.updateKeepingLog(arrivalRequest);
+        return new Status("OK");
     }
 }

@@ -184,7 +184,7 @@
 
     <select
         id="selectPurchaseLog"
-        resultType=""
+        resultType="com.intellicode.openMarket.vo.Status"
             >
         select *
         FROM
@@ -219,7 +219,7 @@
 
     <update
             id="updateArrivalLog"
-            parameterType="">
+            parameterType="com.intellicode.openMarket.vo.delivery.ArrivalRequest">
 
         update tb_product_purchase
         SET
@@ -234,7 +234,7 @@
 
     <update
             id="updateKeepingLog"
-            parameterType="">
+            parameterType="com.intellicode.openMarket.vo.delivery.KeepingRequest">
 
         update tb_product_purchase
         SET

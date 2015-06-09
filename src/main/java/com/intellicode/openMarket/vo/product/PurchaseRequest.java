@@ -4,17 +4,17 @@ package com.intellicode.openMarket.vo.product;
  * Created by rutes_000 on 2015-06-09.
  */
 public class PurchaseRequest {
-    private String productCode;
+    private String productId;
     private int price;
     private int count;
     private String userId;
 
-    public String getProductCode() {
-        return productCode;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setProductId(String productCode) {
+        this.productId = productCode;
     }
 
     public int getPrice() {
