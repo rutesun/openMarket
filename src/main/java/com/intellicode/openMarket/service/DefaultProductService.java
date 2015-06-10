@@ -27,7 +27,6 @@ public class DefaultProductService implements ProductService {
 
     ProductMapper productMapper;
 
-    @Autowired
     PurchaseMapper purchaseMapper;
 
     @PostConstruct
@@ -38,8 +37,8 @@ public class DefaultProductService implements ProductService {
             System.out.println("\n\nBean Name : " + name);
             System.out.println("Bean : " + ctx.getBean(name));
         }
-//        this.productMapper = (ProductMapper) ctx.getBean(ProductMapper.class);
-//        this.purchaseMapper = (PurchaseMapper) ctx.getBean(PurchaseMapper.class);
+        this.productMapper = ctx.getBean(ProductMapper.class);
+        this.purchaseMapper = ctx.getBean(PurchaseMapper.class);
     }
 
     @Override
