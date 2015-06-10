@@ -70,7 +70,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 	</logger>
 	-->
 	<logger name="com.intellicode.openMarket.mapper">
-		<level value="DEBUG" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="org.mybatis.spring.SqlSessionUtils">

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intellicode.openMarket.mapper.PurchaseMapper">
+
+    <insert
+            id="insertProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		insert into tb_product (code, name, price, company_id, info, spec, insert_date, insert_timestamp, amount, inventory_amount, image_url, thumbnail_url, classification1, classification2, classification3, classification4)
+		  values(#{code}, #{name}, #{price}, #{companyId}, #{info}, #{spec}, (select now()), (select UNIX_TIMESTAMP()), #{amount}, #{amount}, #{imageUrl}, #{thumbnailUrl}, #{classification1}, #{classification2}, #{classification3}, #{classification4})
+	</insert>
+
+    <insert
+            id="registSellingProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		insert into tb_product_selling (code, company_id, selling_amount, start_date, start_timestamp, end_date, end_timestamp, register_date, register_timestamp)
+		  values(#{code}, #{companyId}, #{sellingAmount}, (SELECT FROM_UNIXTIME(#{startTimestamp},'%Y-%m-%d %H:%i:%s')), #{startTimestamp}, (SELECT FROM_UNIXTIME(#{endTimestamp},'%Y-%m-%d %H:%i:%s')), #{endTimestamp}. (select UNIX_TIMESTAMP()), (SELECT NOW()))
+	</insert>
+
+    <update
+            id="updateProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+
+    </update>
+
+    <update
+            id="updateProductInventory"
+            parameterType="com.intellicode.openMarket.vo.product.ChangeInventory"
+            >
+        update tb_product
+        SET
+          tb_product.inventory_amount = tb_product.inventory_amount + (#{changedInventoryAmount})
+        where
+        1=1
+            AND code = #{code}
+    </update>
+
+    <update
+            id="pauseSellingProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		delete from tb_product_selling
+		where id = #{param}
+	</update>
+
+    <delete
+            id="deleteProduct"
+            parameterType="com.intellicode.openMarket.vo.product.ProductRequest"
+            >
+		delete from tb_product
+		where id = #{param}
+	</delete>
+
+    <select
+            id="selectSellingProduct"
+            parameterType="com.intellicode.openMarket.vo.product.SearchRequest"
+            resultType="com.intellicode.openMarket.vo.product.ProductResponse"
+            >
+        select *, prod.thumbnail_url thumbnailUrl, prod.image_url imageUrl
+        from tb_product_selling sel inner join tb_product prod on sel.code = prod.code
+        where
+        1=1
+        <if test="id != null">
+            AND sel.id = #{id}
+        </if>
+        <if test="code != null">
+            AND sel.code = #{code}
+        </if>
+        <if test="companyId != null">
+            AND sel.company_id = #{companyId}
+        </if>
+        <if test="name != null">
+            AND prod.name like "%${name}%"
+        </if>
+        <if test="classification1 != null">
+            AND prod.classification1 = #{classification1}
+        </if>
+        <if test="classification2 != null">
+            AND prod.classification2 = #{classification2}
+        </if>
+        <if test="classification3 != null">
+            AND prod.classification3 = #{classification3}
+        </if>
+        <if test="classification4 != null">
+            AND prod.classification4 = #{classification4}
+        </if>
+        AND
+        (sel.start_timestamp <![CDATA[ <= ]]> (select UNIX_TIMESTAMP())
+        AND sel.end_timestamp <![CDATA[ >= ]]> (select UNIX_TIMESTAMP()))
+    </select>
+
+    <select
+            id="selectRecentRegisteredSellingProduct"
+            parameterType="int"
+            resultType="com.intellicode.openMarket.vo.product.ProductResponse"
+            >
+        select *, prod.thumbnail_url thumbnailUrl, prod.image_url imageUrl
+        from tb_product_selling sel inner join tb_product prod on sel.code = prod.code
+        where
+        1=1
+        AND
+        (sel.start_timestamp <![CDATA[ <= ]]> (select UNIX_TIMESTAMP())
+        AND sel.end_timestamp <![CDATA[ >= ]]> (select UNIX_TIMESTAMP()))
+        order by sel.register_date desc
+        limit #{param1}
+    </select>
+
+    <select
+            id="selectProduct"
+            parameterType="com.intellicode.openMarket.vo.product.BaseProduct"
+            resultType="com.intellicode.openMarket.vo.product.ProductResponse"
+            >
+        select
+        tb_product.*,
+        tb_product.inventory_amount as inventoryAmount,
+        tb_product.selled_amount as selledAmount,
+        tb_product.image_url as imageUrl,
+        tb_product.thumbnail_url as thumbnailUrl,
+        tb_company.companyName as companyName
+        from tb_product inner join tb_company on tb_product.company_id = tb_company.companyId
+        where
+        1=1
+        <if test="code != null">
+            AND code = #{code}
+        </if>
+        <if test="companyId != null">
+            AND company_id = #{companyId}
+        </if>
+    </select>
+
+    <select
+            id="selectProductClassification1"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+        select acode code1, name from tb_product_acode
+        order by acode asc
+    </select>
+
+    <select
+            id="selectProductClassification2"
+            parameterType="com.intellicode.openMarket.vo.product.ProductClassification"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+
+        select acode code1, bcode code2, name from tb_product_bcode
+        WHERE
+          acode = #{code1}
+        order by acode, bcode asc
+    </select>
+
+    <select
+            id="selectProductClassification3"
+            parameterType="com.intellicode.openMarket.vo.product.ProductClassification"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+
+        select acode code1, bcode code2, ccode code3, name from tb_product_ccode
+        WHERE
+          acode = #{code1}
+          AND
+          bcode = #{code2}
+    </select>
+
+    <select
+            id="selectProductClassification4"
+            parameterType="com.intellicode.openMarket.vo.product.ProductClassification"
+            resultType="com.intellicode.openMarket.vo.product.ProductClassification">
+
+        select acode code1, bcode code2, ccode code3, dcode code4, name from tb_product_dcode
+         WHERE
+          acode = #{code1}
+          AND
+          bcode = #{code2}
+          AND
+          ccode = #{code3}
+    </select>
+
+    <insert
+            id="insertPurchaseLog"
+            parameterType="com.intellicode.openMarket.vo.product.PurchaseRequest">
+
+        insert into tb_product_purchase (product_id, product_code, customer_id, price, count, register_date, register_timestamp)
+        values (#{productId}, (select code tb_product_selling where id = #{productId}), #{customerId}, #{price}, #{count}, (select now()), (select UNIX_TIMESTAMP()))
+    </insert>
+
+    <select
+        id="selectPurchaseLog"
+        resultType="com.intellicode.openMarket.vo.Status"
+            >
+        select *
+        FROM
+        tb_product_purchase pur inner join tb_product on tb_product_purchase.product_code = tb_product.code
+        WHERE
+         1=1
+        <if test="product_code != null">
+            AND product_code = #{productCode}
+        </if>
+        <if test="customer_id != null">
+            AND customer_id = #{userId}
+        </if>
+
+
+    </select>
+
+    <update
+            id="updateDeliveryLog"
+            parameterType="com.intellicode.openMarket.vo.delivery.Delivery">
+
+        update tb_product_purchase
+        SET
+          delivery_flag = #{delivery_flag},
+          delivery_id = #{deliviryId},
+          delivery_date = (select now()),
+          delivery_timestamp = (select UNIX_TIMESTAMP())
+          WHERE
+          1=1
+          AND
+          id = #{productId}
+    </update>
+
+    <update
+            id="updateArrivalLog"
+            parameterType="com.intellicode.openMarket.vo.delivery.ArrivalRequest">
+
+        update tb_product_purchase
+        SET
+        delivery_flag = #{delivery_flag},
+        arrival_date = (select now()),
+        arrival_timestamp = (select UNIX_TIMESTAMP())
+        WHERE
+        1=1
+        AND
+        id = #{productId}
+    </update>
+
+    <update
+            id="updateKeepingLog"
+            parameterType="com.intellicode.openMarket.vo.delivery.KeepingRequest">
+
+        update tb_product_purchase
+        SET
+        delivery_flag =  #{delivery_flag},
+        keeping_id = #{deliviryId},
+        keeping_date = (select now()),
+        keeping_timestamp = (select UNIX_TIMESTAMP())
+        WHERE
+          1=1
+          AND
+          id = #{productId}
+    </update>
+
+</mapper>

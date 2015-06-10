@@ -1,6 +1,7 @@
 package com.intellicode.openMarket.service;
 
 import com.intellicode.openMarket.mapper.ProductMapper;
+import com.intellicode.openMarket.mapper.PurchaseMapper;
 import com.intellicode.openMarket.util.interceptor.CustomFileUtils;
 import com.intellicode.openMarket.vo.Status;
 import com.intellicode.openMarket.vo.delivery.ArrivalRequest;
@@ -20,31 +21,35 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class DefaultProductService implements ProductService{
+public class DefaultProductService implements ProductService {
     @Autowired
     ApplicationContext ctx;
 
     ProductMapper productMapper;
 
+    @Autowired
+    PurchaseMapper purchaseMapper;
+
     @PostConstruct
-    public void init(){
+    public void init() {
+
         String[] getBeanDefinitionNames = ctx.getBeanDefinitionNames();
-        for(String name : getBeanDefinitionNames){
-            System.out.println("\n\nBean Name : "+ name);
-            System.out.println("Bean : "+ ctx.getBean(name));
+        for (String name : getBeanDefinitionNames) {
+            System.out.println("\n\nBean Name : " + name);
+            System.out.println("Bean : " + ctx.getBean(name));
         }
-        this.productMapper = (ProductMapper) ctx.getBean("productMapper");
-        ctx.getBean(ProductMapper.class);
+//        this.productMapper = (ProductMapper) ctx.getBean(ProductMapper.class);
+//        this.purchaseMapper = (PurchaseMapper) ctx.getBean(PurchaseMapper.class);
     }
 
     @Override
     public Status insertProduct(ProductRequest product) throws Exception {
 
-        System.out.println("Start : "+ System.currentTimeMillis());
+        System.out.println("Start : " + System.currentTimeMillis());
         String mainImageId = CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getImage()),
-            subImageId = product.getThumbnail() != null ?
-                    CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getThumbnail()): mainImageId;
-        System.out.println("End : "+System.currentTimeMillis());
+                subImageId = product.getThumbnail() != null ?
+                        CustomFileUtils.getImageFileId(product.getCompanyId(), product.getCode(), product.getThumbnail()) : mainImageId;
+        System.out.println("End : " + System.currentTimeMillis());
 
         product.setImageUrl(URLEncoder.encode(mainImageId, "UTF-8"));
         product.setThumbnailUrl(URLEncoder.encode(subImageId, "UTF-8"));
@@ -76,7 +81,7 @@ public class DefaultProductService implements ProductService{
 
     @Override
     public List<ProductResponse> selectSellingProduct(SearchRequest product) throws Exception {
-        return productMapper.selectSellingProduct((SearchRequest)product);
+        return productMapper.selectSellingProduct(product);
     }
 
     @Override
