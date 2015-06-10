@@ -8,6 +8,11 @@ public class ChangeInventory {
     private String code;
     private int changedInventoryAmount;
 
+    public ChangeInventory(int id, int changedInventoryAmount) {
+        this.id = id;
+        this.changedInventoryAmount = changedInventoryAmount;
+    }
+
     public ChangeInventory(String code, int changedInventoryAmount) {
         this.code = code;
         this.changedInventoryAmount = changedInventoryAmount;

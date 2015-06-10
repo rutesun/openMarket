@@ -2,11 +2,13 @@ package com.intellicode.openMarket.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellicode.openMarket.service.ProductService;
+import com.intellicode.openMarket.service.PurchaseService;
 import com.intellicode.openMarket.util.interceptor.InitializeProductClassification;
 import com.intellicode.openMarket.vo.Status;
 import com.intellicode.openMarket.vo.User;
 import com.intellicode.openMarket.vo.product.BaseProduct;
 import com.intellicode.openMarket.vo.product.SearchRequest;
+import com.intellicode.openMarket.vo.purchase.PurchaseLogRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +23,11 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/view")
 @SessionAttributes({"userInfo"})
-public class View {
+public class view {
     @Autowired
     ProductService productService;
+    @Autowired
+    PurchaseService purchaseService;
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
     @ResponseBody
@@ -108,6 +112,32 @@ public class View {
         SearchRequest product = new SearchRequest();
         product.setId(id);
         mnv.addObject("productInfo", productService.selectSellingProduct(product));
+        return mnv;
+    }
+
+    @RequestMapping(value = "purchase/list/user", method = RequestMethod.GET)
+    public ModelAndView purchaseList(Locale locale, HttpServletRequest request, HttpServletResponse response
+            //, @PathVariable("type") String type
+            , @ModelAttribute("userInfo") User userInfo
+    ) throws Exception {
+        ModelAndView mnv = new ModelAndView("listPurchase/user");
+
+        PurchaseLogRequest log = new PurchaseLogRequest();
+        log.setUserId("test");
+        mnv.addObject("purchaseList", purchaseService.selectPurchaseLog(log));
+        return mnv;
+    }
+
+    @RequestMapping(value = "purchase/list/seller", method = RequestMethod.GET)
+    public ModelAndView purchaseListForSeller(Locale locale, HttpServletRequest request, HttpServletResponse response
+                                     //, @PathVariable("type") String type
+            , @ModelAttribute("userInfo") User userInfo
+    ) throws Exception {
+        ModelAndView mnv = new ModelAndView("listPurchase/seller");
+
+        PurchaseLogRequest log = new PurchaseLogRequest();
+        log.setCompanyId("RHTwsgyJfn");
+        mnv.addObject("purchaseList", purchaseService.selectPurchaseLog(log));
         return mnv;
     }
 }

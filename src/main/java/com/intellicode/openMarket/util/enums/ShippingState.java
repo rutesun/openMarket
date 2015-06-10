@@ -20,7 +20,7 @@ public enum ShippingState {
         this.state = state;
     }
 
-    public ShippingState getIndex(int idx){
+    public static ShippingState getIndex(int idx){
         return ShippingState.values()[idx];
     }
 
@@ -31,4 +31,5 @@ public enum ShippingState {
     public String getState() {
         return state;
     }
+
 }

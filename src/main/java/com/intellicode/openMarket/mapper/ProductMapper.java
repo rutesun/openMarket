@@ -1,7 +1,5 @@
 package com.intellicode.openMarket.mapper;
 
-import com.intellicode.openMarket.vo.delivery.ArrivalRequest;
-import com.intellicode.openMarket.vo.delivery.Delivery;
 import com.intellicode.openMarket.vo.product.*;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -17,6 +15,7 @@ public interface ProductMapper {
     boolean updateProduct(ProductRequest product) throws Exception;
 
     boolean updateProductInventory(ChangeInventory chage) throws Exception;
+    boolean updateSellingProductInventory(ChangeInventory chage) throws Exception;
 
     boolean deleteProduct(BaseProduct product) throws Exception;
 
@@ -34,9 +33,4 @@ public interface ProductMapper {
     List<ProductClassification> selectProductClassification2(ProductClassification classific) throws Exception;
     List<ProductClassification> selectProductClassification3(ProductClassification classific) throws Exception;
     List<ProductClassification> selectProductClassification4(ProductClassification classific) throws Exception;
-
-    boolean insertPurchaseLog(PurchaseRequest purchaseRequest) throws Exception;
-    boolean updateDeliveryLog(Delivery delivery) throws Exception;
-    boolean updateKeepingLog(ArrivalRequest arrivalRequest) throws Exception;
-
 }

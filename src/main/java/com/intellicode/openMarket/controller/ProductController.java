@@ -3,15 +3,11 @@ package com.intellicode.openMarket.controller;
 import com.intellicode.openMarket.service.ProductService;
 import com.intellicode.openMarket.vo.Status;
 import com.intellicode.openMarket.vo.product.ProductRequest;
-import com.intellicode.openMarket.vo.product.PurchaseRequest;
 import com.intellicode.openMarket.vo.product.RegistSellingRequest;
 import com.intellicode.openMarket.vo.product.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +19,9 @@ import java.util.Locale;
  */
 @RestController
 @RequestMapping("/product")
+@SessionAttributes({"userInfo"})
 public class ProductController {
-    @Autowired
+    //@Autowired
     ProductService productService;
 
     @Autowired
@@ -74,12 +71,4 @@ public class ProductController {
         ) throws Exception {
         return new Status("OK");
     }
-
-    @RequestMapping(value = "/purchase", method = RequestMethod.POST)
-    public Status purchase(Locale locale, HttpServletRequest request, HttpServletResponse response
-                   , PurchaseRequest purchaseRequest
-    ) throws Exception {
-        return productService.insertPurchaseLog(purchaseRequest);
-    }
-
 }

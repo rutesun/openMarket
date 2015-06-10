@@ -27,11 +27,15 @@
 	</definition>
 
 	<definition name="listProduct" extends="base.dashboard">
-		<put-attribute name="body" value="/WEB-INF/views/regist/listProduct.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/product/listProduct.jsp"></put-attribute>
 	</definition>
 
     <definition name="detailProduct" extends="base.dashboard">
-        <put-attribute name="body" value="/WEB-INF/views/regist/detailProduct.jsp"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/product/detailProduct.jsp"></put-attribute>
     </definition>
+
+	<definition name="listPurchase/*" extends="base.dashboard">
+		<put-attribute name="body" value="/WEB-INF/views/purchase/{1}/listPurchase.jsp"></put-attribute>
+	</definition>
 
 </tiles-definitions>

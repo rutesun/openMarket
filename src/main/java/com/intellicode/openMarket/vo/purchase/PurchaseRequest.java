@@ -1,4 +1,4 @@
-package com.intellicode.openMarket.vo.product;
+package com.intellicode.openMarket.vo.purchase;
 
 /**
  * Created by rutes_000 on 2015-06-09.
@@ -7,7 +7,7 @@ public class PurchaseRequest {
     private String productId;
     private int price;
     private int count;
-    private String userId;
+    private String customerId;
 
     public String getProductId() {
         return productId;
@@ -33,11 +33,12 @@ public class PurchaseRequest {
         this.count = count;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
+
 }

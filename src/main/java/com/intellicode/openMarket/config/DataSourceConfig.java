@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -25,11 +24,11 @@ public class DataSourceConfig {
 	@Autowired
 	private Environment env;
 
-	@Autowired
-	private DataSource datasource;
-
-	@Autowired
-	private SqlSessionFactory sqlSessionFactory;
+//	@Autowired
+//	private DataSource datasource;
+//
+//	@Autowired
+//	private SqlSessionFactory sqlSessionFactory;
 
 	@Bean(name = "dataSource")
 	public DataSource dataSource() throws Exception {

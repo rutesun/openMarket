@@ -17,29 +17,61 @@
         </div>
         <div class="col-lg-9">
             <div class="row">
-                <p>${productInfo[0].name}</p>
-                <p>${productInfo[0].info}</p>
-                <p>${productInfo[0].spec}</p>
-                <p id="price">${productInfo[0].price}</p>
+                <div class="form-group">
+                    <label for="count" class="col-sm-4 control-label">제품 이름</label>
+                    <div class="col-sm-8">
+                        <p>${productInfo[0].name}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="count" class="col-sm-4 control-label">제품 정보</label>
+                    <div class="col-sm-8">
+                        <p>${productInfo[0].info}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="count" class="col-sm-4 control-label">제품 스펙</label>
+                    <div class="col-sm-8">
+                        <p>${productInfo[0].spec}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="count" class="col-sm-4 control-label">가격</label>
+                    <div class="col-sm-8">
+                        <p id="price">${productInfo[0].price}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sellingAmount" class="col-sm-4 control-label">구매 가능 수량</label>
+                    <div class="col-sm-8">
+                        <p id="sellingAmount">${productInfo[0].sellingAmount}</p>
+                    </div>
+                </div>
+
+
+
+
             </div>
             <div class="row">
-                <form action="${pageContext.request.contextPath}/product/purchase" method="POST">
+                <form action="${pageContext.request.contextPath}/purchase" method="POST">
                     <input type="hidden" name="productId" id="productId" value="${productInfo[0].id}"/>
                     <div class="form-group">
-                        <label for="count" class="col-sm-3 control-label">구매 수량</label>
-                        <div class="col-sm-9">
+                        <label for="count" class="col-sm-4 control-label">구매 수량</label>
+                        <div class="col-sm-8">
                             <input type="number" class="form-control" name="count" id="count" placeholder="구매 수량"
                                    min="0">
                         </div>
                     </div>
                     <div class="form-group">
-                        <span class="col-sm-3 control-label">예상 금액</span>
-                        <div class="">
+                        <span class="col-sm-4 control-label">예상 금액</span>
+                        <div class="col-sm-8">
                             <span id="expectedAmount"></span>원
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="pull-right">
                         <button type="submit" class="btn btn-primary">구매</button>
+                        </div>
                     </div>
                 </form>
             </div>

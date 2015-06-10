@@ -5,6 +5,7 @@ package com.intellicode.openMarket.vo.product;
  */
 public class ProductResponse extends ProductRequest {
     private String companyName;
+    private int sellingAmount;
 
     public String getCompanyName() {
         return companyName;
@@ -12,5 +13,13 @@ public class ProductResponse extends ProductRequest {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public int getSellingAmount() {
+        return sellingAmount;
+    }
+
+    public void setSellingAmount(int sellingAmount) {
+        this.sellingAmount = sellingAmount;
     }
 }

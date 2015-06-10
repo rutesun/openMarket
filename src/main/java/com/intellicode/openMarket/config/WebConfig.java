@@ -3,6 +3,7 @@ package com.intellicode.openMarket.config;
 import com.intellicode.openMarket.util.interceptor.MultiFileInterceptor;
 import com.intellicode.openMarket.util.interceptor.SessionInterceptor;
 import org.springframework.context.annotation.*;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -68,6 +69,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     return interceptor;
   }
 
+
+
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
@@ -88,5 +91,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
   public MultipartResolver multipartResolver(){
 
     return new StandardServletMultipartResolver();
+  }
+
+  @Override
+  public void addFormatters(FormatterRegistry registry) {
+    super.addFormatters(registry);
   }
 }

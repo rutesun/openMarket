@@ -18,8 +18,8 @@
 <script type="text/javascript">
     var $target = $('#home_todayshot');
     require(['jquery', 'lodash', 'template/deal.template'], function($, _, template){
-        var classifications = $.parseJSON('${classifications}')
-        var productList = $.parseJSON('${productList}')
+        var classifications = $.parseJSON('${classifications}');
+        var productList = $.parseJSON('${productList}');
         console.log(productList);
         console.log(classifications);
 
