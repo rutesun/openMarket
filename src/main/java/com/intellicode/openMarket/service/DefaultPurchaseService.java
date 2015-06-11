@@ -3,6 +3,7 @@ package com.intellicode.openMarket.service;
 import com.intellicode.openMarket.mapper.ProductMapper;
 import com.intellicode.openMarket.mapper.PurchaseMapper;
 import com.intellicode.openMarket.vo.Status;
+import com.intellicode.openMarket.vo.User;
 import com.intellicode.openMarket.vo.delivery.ArrivalRequest;
 import com.intellicode.openMarket.vo.delivery.Delivery;
 import com.intellicode.openMarket.vo.product.ChangeInventory;
@@ -41,16 +42,19 @@ public class DefaultPurchaseService implements PurchaseService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Status insertPurchaseLog(PurchaseRequest purchaseRequest) throws Exception {
+    public Status insertPurchaseLog(User userInfo, PurchaseRequest purchaseRequest) throws Exception {
         String productId = purchaseRequest.getProductId();
         SearchRequest req =  new SearchRequest();
         req.setId(productId);
         List<ProductResponse> list = productMapper.selectSellingProduct(req);
-        int price = list.get(0).getPrice();
-        purchaseRequest.setPrice(price * purchaseRequest.getCount());
+        int price = list.get(0).getPrice(),
+            count = purchaseRequest.getCount(),
+            totalAmount = count * price;
+        purchaseRequest.setPrice(totalAmount);
         purchaseMapper.insertPurchaseLog(purchaseRequest);
         productMapper.updateSellingProductInventory(new ChangeInventory(Integer.valueOf(productId), purchaseRequest.getCount()));
 
+        userInfo.setAccountBalance(userInfo.getAccountBalance() - totalAmount);
         return new Status("OK");
     }
 
@@ -68,6 +72,12 @@ public class DefaultPurchaseService implements PurchaseService{
     @Override
     public Status updateKeepingLog(ArrivalRequest arrivalRequest) throws Exception {
         purchaseMapper.updateKeepingLog(arrivalRequest);
+        return new Status("OK");
+    }
+
+    @Override
+    public Status updateDeliveryState(Delivery delivery) throws Exception {
+        purchaseMapper.updateDeliveryState(delivery);
         return new Status("OK");
     }
 }

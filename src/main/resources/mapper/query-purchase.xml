@@ -63,6 +63,22 @@
     </update>
 
     <update
+            id="updateDeliveryState"
+            parameterType="com.intellicode.openMarket.vo.delivery.Delivery">
+
+        update tb_product_purchase
+        SET
+        delivery_flag = #{delivery_flag},
+         delivery_id = #{deliveryId},
+        delivery_date = (select now()),
+        delivery_timestamp = (select UNIX_TIMESTAMP())
+        WHERE
+        1=1
+        AND
+        id = #{productId}
+    </update>
+
+    <update
             id="updateArrivalLog"
             parameterType="com.intellicode.openMarket.vo.delivery.ArrivalRequest">
 

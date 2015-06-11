@@ -18,4 +18,6 @@ public interface PurchaseMapper {
     List<PurchaseLogResponse> selectPurchaseLog(PurchaseLogRequest purchaseLogRequest) throws Exception;
     boolean updateDeliveryLog(Delivery delivery) throws Exception;
     boolean updateKeepingLog(ArrivalRequest arrivalRequest) throws Exception;
+
+    boolean updateDeliveryState(Delivery delivery) throws Exception;
 }

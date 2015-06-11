@@ -122,6 +122,10 @@ public class view {
     ) throws Exception {
         ModelAndView mnv = new ModelAndView("listPurchase/user");
 
+        Map<String, ?> map = InitializeProductClassification.getClassificationMap();
+        ObjectMapper mapper = new ObjectMapper();
+        mnv.addObject("classifications", mapper.writeValueAsString(map));
+
         PurchaseLogRequest log = new PurchaseLogRequest();
         log.setUserId("test");
         mnv.addObject("purchaseList", purchaseService.selectPurchaseLog(log));
@@ -134,6 +138,10 @@ public class view {
             , @ModelAttribute("userInfo") User userInfo
     ) throws Exception {
         ModelAndView mnv = new ModelAndView("listPurchase/seller");
+
+        Map<String, ?> map = InitializeProductClassification.getClassificationMap();
+        ObjectMapper mapper = new ObjectMapper();
+        mnv.addObject("classifications", mapper.writeValueAsString(map));
 
         PurchaseLogRequest log = new PurchaseLogRequest();
         log.setCompanyId("RHTwsgyJfn");
