@@ -1,6 +1,7 @@
 package com.intellicode.openMarket.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -38,6 +39,9 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
   protected Filter[] getServletFilters() {
     CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
     characterEncodingFilter.setEncoding(StandardCharsets.UTF_8.name());
-    return new Filter[] { characterEncodingFilter };
+
+    DelegatingFilterProxy springSecurityFilterChain = new DelegatingFilterProxy();
+
+    return new Filter[] { characterEncodingFilter, springSecurityFilterChain};
   }
 }
